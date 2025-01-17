@@ -400,7 +400,8 @@
 
                         <div id="acrobacia" class="container">
                             <div class="width_50">
-                                <input id="acrobaciaTreinada" class="pericias BRD LAD MNG SMR SWB" onclick="treinoAcrobacia(); calcularAcrobacia();" type="checkbox" disabled name="acrobacia">
+                                <input type="hidden" name="acrobaciaTreinada" value="0">
+                                <input id="acrobaciaTreinada" class="pericias BRD LAD MNG SMR SWB" onclick="treinoAcrobacia(); calcularAcrobacia();" type="checkbox" disabled name="acrobaciaTreinada" value="1">
                                 <label for="acrobaciaTreinada">Acrobacia✣</label>
                             </div>
                             <div class="width_10">
@@ -408,17 +409,18 @@
                             </div>
                             <div class="width_40">
                                 <span>=</span>
-                                <input id="graduacaoAcrobacia" class="bonusNivel caixaInfoPericias" onclick="treinoAcrobacia()" type="text" placeholder="Grad." readonly>
+                                <input id="graduacaoAcrobacia" class="bonusNivel caixaInfoPericias" onclick="treinoAcrobacia()" type="text" placeholder="Grad." name="graduacaoAcrobacia" readonly>
                                 <span>+</span>
                                 <input class="modificadorDestreza caixaInfoPericias"  type="text" placeholder="Hab." readonly>
                                 <span>+</span>
-                                <input id="acrobaciaExtra" class="penalidadeArmadura caixaInfoPericias" oninput="calcularAcrobacia()" type="text" placeholder="Outros">
+                                <input id="acrobaciaExtra" class="penalidadeArmadura caixaInfoPericias" oninput="calcularAcrobacia()" type="text" placeholder="Outros" name="acrobaciaExtra">
                             </div>
                         </div>
 
                         <div id="adestrar" class="container">
                             <div class="width_50">
-                                <input id="adestrarTreinada" class="pericias BBR DRD GUE PAL RGR SMR" onclick="treinoAdestrar(); calcularAdestrar()" type="checkbox" disabled name="adestrar">
+                                <input type="hidden" name="adestrarTreinada" value="0">
+                                <input id="adestrarTreinada" class="pericias BBR DRD GUE PAL RGR SMR" onclick="treinoAdestrar(); calcularAdestrar()" type="checkbox" disabled name="adestrarTreinada" value="1">
                                 <label for="adestrarTreinada">Adestrar Animais*</label>
                             </div>
                             <div class="width_10">
@@ -426,17 +428,18 @@
                             </div>
                             <div class="width_40">
                                 <span>=</span>
-                                <input id="graduacaoAdestrar" class="bonusNivel caixaInfoPericias" onclick="treinoAdestrar()" type="text" placeholder="Grad." readonly>
+                                <input id="graduacaoAdestrar" class="bonusNivel caixaInfoPericias" onclick="treinoAdestrar()" type="text" placeholder="Grad." readonly name="graduacaoAdestrar">
                                 <span>+</span>
                                 <input class="modificadorCarisma caixaInfoPericias" type="text" placeholder="Hab." readonly>
                                 <span>+</span>
-                                <input id="adestrarExtra" class="caixaInfoPericias" oninput="calcularAdestrar()" type="text" placeholder="Outros">
+                                <input id="adestrarExtra" class="caixaInfoPericias" oninput="calcularAdestrar()" type="text" placeholder="Outros" name="adestrarExtra">
                             </div>
                         </div>
 
                         <div id="atletismo" class="container">
                             <div class="width_50">
-                                <input id="atletismoTreinada" class="pericias BBR BRD DRD GUE LAD MNG PAL RGR SMR SWB" onclick="treinoAtletismo(); calcularAtletismo()" type="checkbox" disabled name="atletismo">
+                                <input type="hidden" name="atletismoTreinada" value="0">
+                                <input id="atletismoTreinada" class="pericias BBR BRD DRD GUE LAD MNG PAL RGR SMR SWB" onclick="treinoAtletismo(); calcularAtletismo()" type="checkbox" disabled name="atletismoTreinada" value="1">
                                 <label for="atletismoTreinada">Atletismo✣</label>
                             </div>
                             <div class="width_10">
@@ -444,24 +447,25 @@
                             </div>
                             <div class="width_40">
                                 <span>=</span>
-                                <input id="graduacaoAtletismo" class="bonusNivel caixaInfoPericias" onclick="treinoAtletismo()" type="text" placeholder="Grad." readonly>
+                                <input id="graduacaoAtletismo" class="bonusNivel caixaInfoPericias" onclick="treinoAtletismo()" type="text" placeholder="Grad." name="graduacaoAtletismo" readonly >
                                 <span>+</span>
                                 <input class="modificadorForca caixaInfoPericias" type="text" placeholder="Hab." readonly>
                                 <span>+</span>
-                                <input id="atletismoExtra" class="penalidadeArmadura caixaInfoPericias" oninput="calcularAtletismo()"type="text" placeholder="Outros">
+                                <input id="atletismoExtra" class="penalidadeArmadura caixaInfoPericias" oninput="calcularAtletismo()"type="text" placeholder="Outros" name="atletismoExtra">
                             </div>
                         </div>
 
                         <div id="atuacao1" class="container">
                             <div class="width_50">
-                                <input id="atuacao1Treinada" class="pericias BRD LAD SMR SWB" onclick="treinoAtuacao1(); calcularAtuacao1()" type="checkbox" disabled id="atuacao1" name="atuacao1">
+                                <input type="hidden" name="atuacao1Treinada" value="0">
+                                <input id="atuacao1Treinada" class="pericias BRD LAD SMR SWB" onclick="treinoAtuacao1(); calcularAtuacao1()" type="checkbox" disabled id="atuacao1" name="atuacao1Treinada" value="1">
                                 <label for="atuacao1Treinada">Atuação</label>
-                                <select name="habilidade1Atuacao">
-                                    <option name="nenhum">Nenhum</option>
-                                    <option name="dramaturgia">Dramaturgia</option>
-                                    <option name="danca">Dança</option>
-                                    <option name="musica">Música</option>
-                                    <option name="oratoria">Oratória</option>
+                                <select id="habi1Atuacao" name="habi1Atuacao">
+                                    <option name="NNM" value="NNM">Nenhum</option>
+                                    <option name="DMT" value="DMT">Dramaturgia</option>
+                                    <option name="DNC" value="DNC">Dança</option>
+                                    <option name="MSC" value="MSC">Música</option>
+                                    <option name="ORT" value="ORT">Oratória</option>
                                 </select>
                             </div>
                             <div class="width_10">
@@ -469,24 +473,25 @@
                             </div>
                             <div class="width_40">
                                 <span>=</span>
-                                <input id="graduacaoAtuacao1" class="bonusNivel caixaInfoPericias" onclick="treinoAtuacao1()" type="text" placeholder="Grad." readonly>
+                                <input id="graduacaoAtuacao1" class="bonusNivel caixaInfoPericias" onclick="treinoAtuacao1()" type="text" placeholder="Grad." readonly name="graduacaoAtuacao1">
                                 <span>+</span>
                                 <input class="modificadorCarisma caixaInfoPericias" type="text" placeholder="Hab." readonly>
                                 <span>+</span>
-                                <input id="atuacao1Extra" class="caixaInfoPericias" oninput="calcularAtuacao1()" type="text" placeholder="Outros">
+                                <input id="atuacao1Extra" class="caixaInfoPericias" oninput="calcularAtuacao1()" type="text" placeholder="Outros" name="atuacao1Extra">
                             </div>
                         </div>
 
                         <div id="atuacao2" class="container">
                             <div class="width_50">
-                                <input id="atuacao2Treinada" class="pericias BRD LAD SMR SWB" onclick="treinoAtuacao2(); calcularAtuacao2()" type="checkbox" disabled id="atuacao2" name="atuacao2">
+                                <input type="hidden" name="atuacao2" value="0">
+                                <input id="atuacao2Treinada" class="pericias BRD LAD SMR SWB" onclick="treinoAtuacao2(); calcularAtuacao2()" type="checkbox" disabled id="atuacao2" name="atuacao2Treinada">
                                 <label for="atuacao2Treinada">Atuação</label>
-                                <select name="habilidade2Atuacao">
-                                    <option name="nenhum">Nenhum</option>
-                                    <option name="dramaturgia">Dramaturgia</option>
-                                    <option name="danca">Dança</option>
-                                    <option name="musica">Música</option>
-                                    <option name="oratoria">Oratória</option>
+                                <select name="habi2Atuacao">
+                                    <option name="NNM" value="NNM">Nenhum</option>
+                                    <option name="DMT" value="DMT">Dramaturgia</option>
+                                    <option name="DNC" value="DNC">Dança</option>
+                                    <option name="MSC" value="MSC">Música</option>
+                                    <option name="ORT" value="ORT">Oratória</option>
                                 </select>
                             </div>
                             <div class="width_10">
@@ -494,11 +499,11 @@
                             </div>
                             <div class="width_40">
                                 <span>=</span>
-                                <input id="graduacaoAtuacao2" class="bonusNivel caixaInfoPericias" onclick="treinoAtuacao2()" type="text" placeholder="Grad." readonly>
+                                <input id="graduacaoAtuacao2" class="bonusNivel caixaInfoPericias" onclick="treinoAtuacao2()" type="text" placeholder="Grad." readonly name="graduacaoAtuacao2">
                                 <span>+</span>
                                 <input class="modificadorCarisma caixaInfoPericias" type="text" placeholder="Hab." readonly>
                                 <span>+</span>
-                                <input id="atuacao2Extra" class="caixaInfoPericias" oninput="calcularAtuacao2()" type="text" placeholder="Outros">
+                                <input id="atuacao2Extra" class="caixaInfoPericias" oninput="calcularAtuacao2()" type="text" placeholder="Outros" name="atuacao2Extra">
                             </div>
                         </div>
 

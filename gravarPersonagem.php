@@ -45,18 +45,69 @@
             $totalCA = $_POST["totalCA"];
             $bonusNivel = $_POST["bonusNivel"]; //Campo salvo apenas uma vez, mas utilizado diversas vezes
             $bonusTamanho = $_POST["bonusTamanho"];
+            if ($bonusTamanho == "") { //Validação de campos vazios
+                $bonusTamanho = 0;
+            }
             $caExtra1 = $_POST["caExtra1"];
+            if ($caExtra1 == "") { //Validação de campos vazios
+                $caExtra1 = 0;
+            }
             $caExtra2 = $_POST["caExtra2"];
+            if ($caExtra2 == "") { //Validação de campos vazios
+                $caExtra2 = 0;
+            }
             //Término das informações de classe de armadura
 
             //Início das informações de resistências
             $totalFortitude = $_POST["totalFortitude"];
             $fortitudeExtra = $_POST["fortitudeExtra"];
+            if ($fortitudeExtra == ""){ //Validação de campos vazios
+                $fortitudeExtra = 0;
+            }
             $totalReflexo = $_POST["totalReflexo"];
             $reflexoExtra = $_POST["reflexoExtra"];
+            if ($reflexoExtra == ""){ //Validação de campos vazios
+                $reflexoExtra = 0;
+            }
             $totalVontade = $_POST["totalVontade"];
             $vontadeExtra = $_POST["vontadeExtra"];
+            if ($vontadeExtra == ""){ //Validação de campos vazios
+                $vontadeExtra = 0;
+            }
             //Término das informações de resistências
+
+            //Início das informações de perícias
+            $acroTreinada = $_POST["acrobaciaTreinada"];
+            $acroTotal = $_POST["acrobaciaTotal"];
+            $acroGraduacao = $_POST{"graduacaoAcrobacia"};
+            $acroExtra = $_POST["acrobaciaExtra"];
+            if($acroExtra == "") {
+                $acroExtra = 0;
+            }
+            $adesTreinada = $_POST["adestrarTreinada"];
+            $adesTotal = $_POST["adestrarTotal"];
+            $adesGraduacao = $_POST["graduacaoAdestrar"];
+            $adesExtra = $_POST["adestrarExtra"];
+            if($adesExtra == "") {
+                $adesExtra = 0;
+            }
+            $atleTreinada = $_POST["atletismoTreinada"];
+            $atleTotal = $_POST["atletismoTotal"];
+            $atleGraduacao = $_POST["graduacaoAtletismo"];
+            $atleExtra = $_POST["atletismoExtra"];
+            if($atleExtra == "") {
+                $atleExtra = 0;
+            }
+            $atua1Treinada = $_POST["atuacao1Treinada"];
+            $atua1Habilidade = $_POST["habi1Atuacao"];
+            $atua1Total = $_POST["atuacao1Total"];
+            $atua1Graduacao = $_POST["graduacaoAtuacao1"];
+            $atua1Extra = $_POST["atuacao1Extra"];
+            if($atua1Extra == "") {
+                $atua1Extra = 0;
+            }
+            //Término das informações de perícias
+
 
             echo "<h1>Personagem cadastrado</h1>";
             echo "O personagem possui o nome de $nomePersonagem<br>";
@@ -71,6 +122,11 @@
             echo "O personagem possui o tamanho de $tamanhoPersonagem<br>";
             echo "O personagem possui o deslocamento de $deslocamentoPersonagem<br>";
             echo "O personagem possui forca de $valorForca<br>";
+            echo "Pericia treinada $atua1Treinada<br>";
+            echo "Habilidade $atua1Habilidade<br>";
+            echo "Total de $atua1Total<br>";
+            echo "Graduacao de $atleGraduacao<br>";
+            echo "Pontos extra de $atua1Extra<br>";
 
             //Conexão com o Banco de Dados
             $con = mysqli_connect("localhost", "root", "");
@@ -99,11 +155,18 @@
                         VALUES ('$idPersonagem', '$totalCA', '$bonusNivel', '$bonusTamanho', '$caExtra1', '$caExtra2')";
                         
                         if($con->query($classeArmadura) === TRUE) {
-                            $resistencia = "INSERT INTO resiPersonagem(idPersonagem, totalFortitude, fortitudeExtra)
-                            VALUES ('$idPersonagem', '$totalFortitude', '$fortitudeExtra')";
+                            $resistencia = "INSERT INTO resiPersonagem(idPersonagem, totalFortitude, fortitudeExtra, totalReflexo, reflexoExtra, totalVontade, vontadeExtra)
+                            VALUES ('$idPersonagem', '$totalFortitude', '$fortitudeExtra', '$totalReflexo', '$reflexoExtra', '$totalVontade', '$vontadeExtra')";
 
                             if($con->query($resistencia) === TRUE) {
-                                echo "Personagem, habilidades, vida, classe de armadura e resistências cadastrados.";
+                                $pericias = "INSERT INTO periPersonagem(idPersonagem, acroTreinada, acroTotal, acroGraduacao, acroExtra, adesTreinada, adesTotal, adesGraduacao, adesExtra, atleTreinada, atleGraduacao, atleTotal, atleExtra, atua1Treinada, atua1Habilidade, atua1Total, atua1Extra)
+                                VALUES ('$idPersonagem', '$acroTreinada', '$acroTotal', '$acroGraduacao', '$acroExtra', '$adesTreinada', '$adesTotal', '$adesGraduacao', '$adesExtra', '$atleTreinada', '$atleGraduacao', '$atleTotal', '$atleExtra', '$atua1Treinada', '$atua1Habilidade', '$atua1Total', '$atua1Extra')";
+                                
+                                if($con->query($pericias) === TRUE) {
+                                    echo "Personagem, habilidades, vida, classe de armadura, resistências e perícias cadastrados.";
+                                } else {
+                                    echo "Erro ao inserir as pericias: " . $con->error;
+                                }
                             } else {
                                 echo "Erro ao inserir as resistências: " . $con->error;
                             }
