@@ -1,0 +1,70 @@
+//A criação de uma tabela com o propósito de armazenar as principais informações sobre o personagem
+create table infoPersonagem (
+    idPersonagem int auto_increment,
+    nomePersonagem varchar(50) not null,
+    nomeJogador varchar(30),
+    nivelPersonagem int not null default 0,
+    racaPersonagem enum("AN","EL","GO","GN","HA","HU","LE","ME","MO","MI","QA") not null,
+    classePersonagem enum("BBR","BRD","CLR","DRD","FET","GUE","LAD","MAG","MNG","PAL","RGR","SMR","SWB"),
+    tendenciaPersonagem enum("LB","NB","CB","LN","NN","CN","LM","NM","CM"),
+    sexoPersonagem enum("F","M"),
+    idadePersonagem int default 0,
+    divindadePersonagem enum("ALL","AZG","HYN","KAL","KEE","KHA","LEN","LIN","MAR","MEG","NIM","OCE","RAG","SSZ","TAN","TAU","TEN","THY","WYN","VAL"),
+    tamanhoPersonagem varchar(15),
+    deslocamentoPersonagem varchar(15),
+
+    primary key(idPersonagem)
+);
+
+//Uma segunda tabela na qual armazenará os dados de habilidades do personagem
+create table habiPersonagem (
+    idPersonagem int,
+    valorForca int not null,
+    modificadorForca int not null,
+    valorDestreza int not null,
+    modificadorDestreza int not null,
+    valorConstituicao int not null,
+    modificadorConstituicao int not null,
+    valorInteligencia int not null,
+    modificadorInteligencia int not null,
+    valorSabedoria int not null,
+    modificadorSabedoria int not null,
+    valorCarisma int not null,
+    modificadorCarisma int not null,
+
+    foreign key (idPersonagem) references infoPersonagem (idPersonagem)
+);
+
+//Uma terceira tabela na qual armazenará os pontos de vida do personagem
+create table pontosVida (
+    idPersonagem int,
+    vidaTotal int,
+    vidaAtual int,
+
+    foreign key (idPersonagem) references infoPersonagem (idPersonagem)
+);
+
+//A quarta tabela será responsável pelo armazenamento da classe de armadura do personagem
+create table classeArmadura (
+    idPersonagem int,
+    totalCA int,
+    bonusNivel int not null default 0,
+    bonusTamanho int default 0,
+    caExtra1 int default 0,
+    caExtra2 int default 0,
+
+    foreign key (idPersonagem) references infoPersonagem (idPersonagem)
+);
+
+create table resiPersonagem (
+    idPersonagem int,
+    totalFortitude int,
+    fortitudeExtra int not null default 0,
+
+    foreign key (idPersonagem) references infoPersonagem (idPersonagem)
+);
+    fortitudeExtra int not null default 0,
+    totalReflexo int,
+    reflexoExtra int default 0,
+    totalVontade int,
+    vontadeExtra int default 0,

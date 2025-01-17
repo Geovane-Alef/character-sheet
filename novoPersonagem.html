@@ -1,0 +1,1234 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Criação de Personagem - Tormenta</title>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="style.css">
+        <script src="scripts.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale: 1">
+    </head>
+    <body>
+        <section>
+            <h1>Criação de Personagem</h1>
+            <form action="gravarPersonagem.php" method="post" enctype="multipart/form-data">
+                <input type="submit" value="Cadastrar">
+                <div class="container infoBasicas">
+                    <div>
+                        <label for="nomePersonagem">Nome do Personagem: </label>
+                        <input id="nomePersonagem" type="text" name="nomePersonagem">
+                    </div>
+                    
+                    <div>
+                        <label for="nomeJogador">Jogador: </label>
+                        <input id="nomeJogador" type="text" name="nomeJogador" size="20">
+                    </div>
+
+                    <div>
+                        <label for="nivelPersonagem">Nível: </label>
+                        <input id="nivelPersonagem" oninput="metadeNivel(); classeEscolhida();" type="text" name="nivelPersonagem" placeholder="Entre 1 e 20" size="8">
+                    </div>
+                    
+                    <div>
+                        <label for="racaPersonagem">Raça: </label>
+                        <select id="racaPersonagem" name="racaPersonagem">
+                            <option name="" value="" disabled selected>Escolha</option>
+                            <option name="AN" value="AN">Anão</option>
+                            <option name="EL" value="EL">Elfo</option>
+                            <option name="GO" value="GO">Goblin</option>
+                            <option name="GN" value="GN">Gnomo</option>
+                            <option name="HA" value="HA">Halfling</option>
+                            <option name="HU" value="HU">Humano</option>
+                            <option name="LE" value="LE">Lefou</option>
+                            <option name="ME" value="ME">Meio-elfo</option>
+                            <option name="MO" value="MO">Meio-orc</option>
+                            <option name="MI" value="MI">Minotauro</option>
+                            <option name="QA" value="QA">Qareen</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="classePersonagem">Classe: </label>
+                        <select id="classePersonagem" name="classePersonagem" onchange="classeEscolhida()">
+                            <option name="" value="" disabled selected>Escolha</option>
+                            <option name="BBR" value="BBR">Bárbaro</option>
+                            <option name="BRD" value="BRD">Bardo</option>
+                            <option name="CLR" value="CLR">Clérigo</option>
+                            <option name="DRD" value="DRD">Druida</option>
+                            <option name="FET" value="FET">Feiticeiro</option>
+                            <option name="GUE" value="GUE">Guerreiro</option>
+                            <option name="LAD" value="LAD">Ladino</option>
+                            <option name="MAG" value="MAG">Mago</option>
+                            <option name="MNG" value="MNG">Monge</option>
+                            <option name="PAL" value="PAL">Paladino</option>
+                            <option name="RGR" value="RGR">Ranger</option>
+                            <option name="SMR" value="SMR">Samurai</option>
+                            <option name="SWB" value="SWB">Swashbuckler</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="container infoBasicas">
+                    <div>
+                        <label for="tendenciaPersonagem">Tendência: </label>
+                        <select id="tendenciaPersonagem" name="tendenciaPersonagem">
+                            <option name="" value="" disabled selected>Escolha</option>
+                            <option name="LB" value="LB">Leal e Bom</option>
+                            <option name="NB" value="NB">Neutro e Bom</option>
+                            <option name="CB" value="CB">Caótico e Bom</option>
+                            <option name="LN" value="LN">Leal e Neutro</option>
+                            <option name="NN" value="NN">Neutro e Neutro</option>
+                            <option name="CN" value="CN">Caótico e Neutro</option>
+                            <option name="LM" value="LM">Leal e Maligno</option>
+                            <option name="NM" value="NM">Neutro e Maligno</option>
+                            <option name="CM" value="CM">Caótico e Maligno</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="sexoPersonagem">Sexo: </label>
+                        <select id="sexoPersonagem" name="sexoPersonagem">
+                            <option name="" value="" disabled selected>Escolha</option>
+                            <option name="F" class="hideMobile" value="F">Feminino</option>
+                            <option name="M" class="hideMobile" value="M">Masculino</option>
+                            <option name="F" class="hideDesktop" value="F">Femi.</option>
+                            <option name="M" class="hideDesktop" value="M">Masc.</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="idadePersonagem">Idade: </label>
+                        <input id="idadePersonagem" type="text" name="idadePersonagem" size="8">
+                    </div>
+
+                    <div>
+                        <label for="divindadePersonagem">Divindade: </label>
+                        <select id="divindadePersonagem" name="divindadePersonagem">
+                            <option name="" value="" disabled selected>Escolha</option>
+                            <option name="ALL" value="ALL">Allihanna</option>
+                            <option name="AZG" value="AZG">Azgher</option>
+                            <option name="HYN" value="HYN">Hyninn</option>
+                            <option name="KAL" value="KAL">Kallyadranoch</option>
+                            <option name="KEE" value="KEE">Keenn</option>
+                            <option name="KHA" value="KHA">Khalmyr</option>
+                            <option name="LEN" value="LEN">Lena</option>
+                            <option name="LIN" value="LIN">Lin-Wu</option>
+                            <option name="MAR" value="MAR">Marah</option>
+                            <option name="MEG" value="MEG">Megalokk</option>
+                            <option name="NIM" value="NIM">Nimb</option>
+                            <option name="OCE" value="OCE">Oceano</option>
+                            <option name="RAG" value="RAG">Ragnar</option>
+                            <option name="SSZ" value="SSZ">Sszzaas</option>
+                            <option name="TAN" value="TAN">Tanna-Toh</option>
+                            <option name="TAU" value="TAU">Tauron</option>
+                            <option name="TEN" value="TEN">Tenebra</option>
+                            <option name="THY" value="THY">Thyatis</option>
+                            <option name="WYN" value="WYN">Wynna</option>
+                            <option name="VAL" value="VAL">Valkaria</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="tamanhoPersonagem">Tamanho: </label>
+                        <input id="tamanhoPersonagem" type="text" name="tamanhoPersonagem" size="8">
+                    </div>
+
+                    <div>
+                        <label for="deslocamentoPersonagem">Deslocamento: </label>
+                        <input id="deslocamentoPersonagem" type="text" name="deslocamentoPersonagem" size="8">
+                    </div>
+                </div>
+                
+                <div class="container" id="infoFisico">
+                    <div class="width_20 tabletTo42">
+                        <div class="container habilidades">
+                            <div class="width_29">
+                                <h5>Habilidades</h5>
+                            </div>
+                            <div class="width_21">
+                                <h5>Valor</h5>
+                            </div>
+                            <div class="width_50">
+                                <h5>Modificador de Hab.</h5>
+                            </div>
+                        </div>
+
+                        <div id="" class="container habilidades">
+                            <div class="width_29">
+                                <label for="valorForca">Força</label>
+                            </div>
+                            <div class="width_21">
+                                <input id="valorForca" oninput="converterForca()" type="text" name="valorForca" placeholder="10">
+                            </div>
+                            <div class="width_50">
+                                <input class="modificadorForca" type="text" name="modificadorForca" placeholder="0">
+                            </div>
+                        </div>
+
+                        <div id="" class="container habilidades">
+                            <div class="width_29">
+                                <label for="valorDestreza">Destreza</label>
+                            </div>
+                            <div class="width_21">
+                                <input id="valorDestreza" oninput="converterDestreza()" type="text" name="valorDestreza" placeholder="10">
+                            </div>
+                            <div class="width_50">
+                                <input class="modificadorDestreza" type="text" name="modificadorDestreza" placeholder="0">
+                            </div>
+                        </div>
+
+                        <div id="" class="container habilidades">
+                            <div class="width_29">
+                                <label for="valorConstituicao">Constituição</label>
+                            </div>
+                            <div class="width_21">
+                                <input id="valorConstituicao" oninput="converterConstituicao()" type="text" name="valorConstituicao" placeholder="10">
+                            </div>
+                            <div class="width_50">
+                                <input class="modificadorConstituicao" type="text" name="modificadorConstituicao" placeholder="0">
+                            </div>
+                        </div>
+
+                        <div id="" class="container habilidades">
+                            <div class="width_29">
+                                <label for="valorInteligencia">Inteligência</label>
+                            </div>
+                            <div class="width_21">
+                                <input id="valorInteligencia" oninput="converterInteligencia()" type="text" name="valorInteligencia" placeholder="10">
+                            </div>
+                            <div class="width_50">
+                                <input class="modificadorInteligencia" type="text" name="modificadorInteligencia" placeholder="0">
+                            </div>
+                        </div>
+
+                        <div id="" class="container habilidades">
+                            <div class="width_29">
+                                <label for="valorSabedoria">Sabedoria</label>
+                            </div>
+                            <div class="width_21">
+                                <input id="valorSabedoria" oninput="converterSabedoria()" type="text" name="valorSabedoria" placeholder="10">
+                            </div>
+                            <div class="width_50">
+                                <input class="modificadorSabedoria" type="text" name="modificadorSabedoria" placeholder="0">
+                            </div>
+                        </div>
+
+                        <div id="" class="container habilidades">
+                            <div class="width_29">
+                                <label for="valorCarisma">Carisma</label>
+                            </div>
+
+                            <div class="width_21">
+                                <input id="valorCarisma" oninput="converterCarisma()" type="text" name="valorCarisma" placeholder="10">
+                            </div>
+
+                            <div class="width_50">
+                                <input class="modificadorCarisma" type="text" name="modificadorCarisma" placeholder="0">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="width_55 tabletTo58">
+                        <div class="container">
+                            <div class="width_20 tabletTo100">
+                                <h5 class="titleMobile">Pontos de Vida</h5>
+                            </div>
+                            <div class="width_10 mobileTo20">
+                                <h5>Total</h5>
+                            </div>
+                            <div class="width_10 mobileTo20">
+                                <h5>Atuais</h5>
+                            </div>
+                            <div class="width_30">
+                                <h5>PV no 1º nível</h5>
+                            </div>
+                            <div class="width_30">
+                                <h5>PV por nível</h5>
+                            </div>
+                        </div>
+                        <div class="container">
+                            <div class="width_20 hideMobile hideTablet">
+                                <label for="vidaTotal">PV</label>
+                            </div>
+                            <div class="width_10 mobileTo20">
+                                <input id="vidaTotal" type="text" name="vidaTotal">
+                            </div>
+                            <div class="width_10 mobileTo20">
+                                <input id="vidaAtual" type="text" name="vidaAtual">
+                            </div>
+                            <div class="width_30">
+                                <input id="vidaInicial" type="text" name="" placeholder="10" readonly>
+                                <span>+</span>
+                                <input class="modificadorConstituicao" type="text" name="calculoVida" placeholder="Con" readonly>
+                            </div>
+                            <div class="width_30">
+                                <input id="vidaPorNivel" type="text" name="" readonly>
+                                <span>+</span>
+                                <input class="modificadorConstituicao" type="text" name="calculoVida" placeholder="Con" readonly>
+                            </div>
+                        </div>
+                        <div class="container"> 
+                            <div class="width_20 tabletTo100">
+                                <h5 class="titleMobile">Classe de Armadura</h5>
+                            </div>
+                            <div class="width_10 mobileTo12">
+                                <h5>Total</h5>
+                            </div>
+                            <div class="width_10 mobileTo12">
+                                <h5>Base</h5>
+                            </div>
+                            <div class="width_60 mobileTo76">
+                                <h5>Cálculo</h5>
+                            </div>
+                        </div>
+                        <div class="container"> 
+                            <div class="width_20 hideMobile hideTablet">
+                                <label for="totalCA">CA</label>
+                            </div>
+                            <div class="width_10 mobileTo12">
+                                <input id="totalCA" onclick="calcularCA()" type="text" name="totalCA" readonly>
+                            </div>
+                            <div class="width_10 mobileTo12">
+                                <span>10</span>
+                            </div>
+                            <div class="width_60 mobileTo76">
+                                <span>+</span>
+                                <input class="bonusNivel" onclick="calcularCA()" type="text" placeholder="1/2 nível" name="bonusNivel" readonly>
+                                <span>+</span>
+                                <input class="modificadorDestreza" onclick="calcularCA()" type="text" placeholder="Des" readonly>
+                                <span>+</span>
+                                <input id="bonusArmadura" onclick="calcularCA()" type="text" placeholder="Armadura" readonly>
+                                <span>+</span>
+                                <input id="bonusEscudo" onclick="calcularCA()" type="text" placeholder="Escudo" readonly>
+                                <span>+</span>
+                                <input id="bonusTamanho" oninput="calcularCA()" type="text" placeholder="Tamanho" name="bonusTamanho">
+                                <span>+</span>
+                                <input id="caExtra1" oninput="calcularCA()" type="text" placeholder="Outros" name="caExtra1" readonly>
+                                <span>+</span>
+                                <input id="caExtra2" oninput="calcularCA()" type="text" placeholder="Outros" name="caExtra2">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="width_25 tabletTo100">
+                        <div class="container">
+                            <div class="width_30">
+                                <h5>Resistência</h5>
+                            </div>
+                            <div class="width_10">
+                                <h5>Total</h5>
+                            </div>
+                            <div class="width_60">
+                                <h5>Cálculo</h5>
+                            </div> 
+                        </div>
+                        <div class="container">
+                            <div class="width_30">
+                                <label for="totalFortitude">Fortitude</label>
+                            </div>
+                            <div class="width_10">
+                                <input id="totalFortitude" onclick="calcularFortitude()" type="text" name="totalFortitude" readonly>
+                            </div>
+                            <div class="width_60">
+                                <span>=</span>
+                                <input class="bonusNivel" onclick="calcularFortitude()" type="text"placeholder="1/2 nível" readonly>
+                                <span>+</span>
+                                <input class="modificadorConstituicao" onclick="calcularFortitude()" type="text"placeholder="Habilid." readonly>
+                                <span>+</span>
+                                <input id="fortitudeExtra" oninput="calcularFortitude()" name="fortitudeExtra" type="text" placeholder="Outros">
+                            </div> 
+                        </div>
+                        <div class="container">
+                            <div class="width_30">
+                                <label for="totalReflexo">Reflexo</label>
+                            </div>
+                            <div class="width_10">
+                                <input id="totalReflexo" onclick="calcularReflexo()" type="text" name="totalReflexo" readonly>
+                            </div>
+                            <div class="width_60">
+                                <span>=</span>
+                                <input class="bonusNivel" onclick="calcularReflexo()" type="text"placeholder="1/2 nível" readonly>
+                                <span>+</span>
+                                <input class="modificadorDestreza" onclick="calcularReflexo()" type="text"placeholder="Habilid." readonly>
+                                <span>+</span>
+                                <input id="reflexoExtra" oninput="calcularReflexo()" name="reflexoExtra" type="text" placeholder="Outros">
+                            </div> 
+                        </div>
+                        <div class="container">
+                            <div class="width_30">
+                                <label for="totalVontade">Vontade</label>
+                            </div>
+                            <div class="width_10">
+                                <input id="totalVontade" onclick="calcularVontade()" type="text" name="totalVontade" readonly>
+                            </div>
+                            <div class="width_60">
+                                <span>=</span>
+                                <input class="bonusNivel" onclick="calcularVontade()" type="text"placeholder="1/2 nível" readonly>
+                                <span>+</span>
+                                <input class="modificadorSabedoria" onclick="calcularVontade()" type="text"placeholder="Habilid." readonly>
+                                <span>+</span>
+                                <input id="vontadeExtra" oninput="calcularVontade()" name="vontadeExtra" type="text" placeholder="Outros">
+                            </div> 
+                        </div>
+                        <div class="container">
+                            <div class="width_100">
+                                <h5>Perícias Treinadas</h5>
+                            </div>
+                            <div class="width_100">
+                                <input id="periciaBase" type="text" name="periciaBase" readonly>
+                                <span>+</span>
+                                <input class="modificadorInteligencia" type="text" placeholder="Int" readonly>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+
+                <div class="container" id="infoPericias">
+                    <div class="width_33 tabletTo100">
+                        <div class="container titulosPericias">
+                            <div class="width_50">
+                                <h5>Perícias</h5>
+                            </div>
+                            <div class="width_10">
+                                <h5>Total</h5>
+                            </div>
+                            <div class="width_40">
+                                <h5>Cálculo</h5>
+                            </div>
+                        </div>
+
+                        <div id="acrobacia" class="container">
+                            <div class="width_50">
+                                <input id="acrobaciaTreinada" class="pericias BRD LAD MNG SMR SWB" onclick="treinoAcrobacia(); calcularAcrobacia();" type="checkbox" disabled name="acrobacia">
+                                <label for="acrobaciaTreinada">Acrobacia✣</label>
+                            </div>
+                            <div class="width_10">
+                                <input id="acrobaciaTotal" class="caixaInfoPericias" onclick="treinoAcrobacia(); calcularAcrobacia();" type="text" name="acrobaciaTotal" readonly>
+                            </div>
+                            <div class="width_40">
+                                <span>=</span>
+                                <input id="graduacaoAcrobacia" class="bonusNivel caixaInfoPericias" onclick="treinoAcrobacia()" type="text" placeholder="Grad." readonly>
+                                <span>+</span>
+                                <input class="modificadorDestreza caixaInfoPericias"  type="text" placeholder="Hab." readonly>
+                                <span>+</span>
+                                <input id="acrobaciaExtra" class="penalidadeArmadura caixaInfoPericias" oninput="calcularAcrobacia()" type="text" placeholder="Outros">
+                            </div>
+                        </div>
+
+                        <div id="adestrar" class="container">
+                            <div class="width_50">
+                                <input id="adestrarTreinada" class="pericias BBR DRD GUE PAL RGR SMR" onclick="treinoAdestrar(); calcularAdestrar()" type="checkbox" disabled name="adestrar">
+                                <label for="adestrarTreinada">Adestrar Animais*</label>
+                            </div>
+                            <div class="width_10">
+                                <input id="adestrarTotal" class="caixaInfoPericias" onclick="treinoAdestrar(); calcularAdestrar();" type="text" name="adestrarTotal" readonly>
+                            </div>
+                            <div class="width_40">
+                                <span>=</span>
+                                <input id="graduacaoAdestrar" class="bonusNivel caixaInfoPericias" onclick="treinoAdestrar()" type="text" placeholder="Grad." readonly>
+                                <span>+</span>
+                                <input class="modificadorCarisma caixaInfoPericias" type="text" placeholder="Hab." readonly>
+                                <span>+</span>
+                                <input id="adestrarExtra" class="caixaInfoPericias" oninput="calcularAdestrar()" type="text" placeholder="Outros">
+                            </div>
+                        </div>
+
+                        <div id="atletismo" class="container">
+                            <div class="width_50">
+                                <input id="atletismoTreinada" class="pericias BBR BRD DRD GUE LAD MNG PAL RGR SMR SWB" onclick="treinoAtletismo(); calcularAtletismo()" type="checkbox" disabled name="atletismo">
+                                <label for="atletismoTreinada">Atletismo✣</label>
+                            </div>
+                            <div class="width_10">
+                                <input id="atletismoTotal" class="caixaInfoPericias" onclick="treinoAtletismo(); calcularAtletismo();" type="text" name="atletismoTotal" readonly>
+                            </div>
+                            <div class="width_40">
+                                <span>=</span>
+                                <input id="graduacaoAtletismo" class="bonusNivel caixaInfoPericias" onclick="treinoAtletismo()" type="text" placeholder="Grad." readonly>
+                                <span>+</span>
+                                <input class="modificadorForca caixaInfoPericias" type="text" placeholder="Hab." readonly>
+                                <span>+</span>
+                                <input id="atletismoExtra" class="penalidadeArmadura caixaInfoPericias" oninput="calcularAtletismo()"type="text" placeholder="Outros">
+                            </div>
+                        </div>
+
+                        <div id="atuacao1" class="container">
+                            <div class="width_50">
+                                <input id="atuacao1Treinada" class="pericias BRD LAD SMR SWB" onclick="treinoAtuacao1(); calcularAtuacao1()" type="checkbox" disabled id="atuacao1" name="atuacao1">
+                                <label for="atuacao1Treinada">Atuação</label>
+                                <select name="habilidade1Atuacao">
+                                    <option name="nenhum">Nenhum</option>
+                                    <option name="dramaturgia">Dramaturgia</option>
+                                    <option name="danca">Dança</option>
+                                    <option name="musica">Música</option>
+                                    <option name="oratoria">Oratória</option>
+                                </select>
+                            </div>
+                            <div class="width_10">
+                                <input id="atuacao1Total" class="caixaInfoPericias" onclick="treinoAtuacao1(); calcularAtuacao1();" type="text" name="atuacao1Total" readonly>
+                            </div>
+                            <div class="width_40">
+                                <span>=</span>
+                                <input id="graduacaoAtuacao1" class="bonusNivel caixaInfoPericias" onclick="treinoAtuacao1()" type="text" placeholder="Grad." readonly>
+                                <span>+</span>
+                                <input class="modificadorCarisma caixaInfoPericias" type="text" placeholder="Hab." readonly>
+                                <span>+</span>
+                                <input id="atuacao1Extra" class="caixaInfoPericias" oninput="calcularAtuacao1()" type="text" placeholder="Outros">
+                            </div>
+                        </div>
+
+                        <div id="atuacao2" class="container">
+                            <div class="width_50">
+                                <input id="atuacao2Treinada" class="pericias BRD LAD SMR SWB" onclick="treinoAtuacao2(); calcularAtuacao2()" type="checkbox" disabled id="atuacao2" name="atuacao2">
+                                <label for="atuacao2Treinada">Atuação</label>
+                                <select name="habilidade2Atuacao">
+                                    <option name="nenhum">Nenhum</option>
+                                    <option name="dramaturgia">Dramaturgia</option>
+                                    <option name="danca">Dança</option>
+                                    <option name="musica">Música</option>
+                                    <option name="oratoria">Oratória</option>
+                                </select>
+                            </div>
+                            <div class="width_10">
+                                <input id="atuacao2Total" class="caixaInfoPericias" onclick="treinoAtuacao2(); calcularAtuacao2();" type="text" name="atuacao2Total" readonly>
+                            </div>
+                            <div class="width_40">
+                                <span>=</span>
+                                <input id="graduacaoAtuacao2" class="bonusNivel caixaInfoPericias" onclick="treinoAtuacao2()" type="text" placeholder="Grad." readonly>
+                                <span>+</span>
+                                <input class="modificadorCarisma caixaInfoPericias" type="text" placeholder="Hab." readonly>
+                                <span>+</span>
+                                <input id="atuacao2Extra" class="caixaInfoPericias" oninput="calcularAtuacao2()" type="text" placeholder="Outros">
+                            </div>
+                        </div>
+
+                        <div id="cavalgar" class="container">
+                            <div class="width_50">
+                                <input id="cavalgarTreinada" class="pericias BBR BRD DRD GUE LAD PAL RGR SMR SWB" onclick="treinoCavalgar(); calcularCavalgar()" type="checkbox" disabled name="cavalgar">
+                                <label for="cavalgarTreinada">Cavalgar</label>
+                            </div>
+                            <div class="width_10">
+                                <input id="cavalgarTotal" class="caixaInfoPericias" onclick="treinoCavalgar(); calcularCavalgar();" type="text" name="cavalgarTotal" readonly>
+                            </div>
+                            <div class="width_40">
+                                <span>=</span>
+                                <input id="graduacaoCavalgar" class="bonusNivel caixaInfoPericias" onclick="treinoCavalgar()" type="text" placeholder="Grad." readonly>
+                                <span>+</span>
+                                <input class="modificadorDestreza caixaInfoPericias" type="text" placeholder="Hab." readonly>
+                                <span>+</span>
+                                <input id="cavalgarExtra" class="caixaInfoPericias" oninput="calcularCavalgar()" type="text" placeholder="Outros">
+                            </div>
+                        </div>
+
+                        <div id="conhecimento1" class="container">
+                            <div class="width_50">
+                                <input id="conhecimento1Treinada" class="pericias BRD CLR DRD FET LAD MAG MNG PAL RGR SMR" onclick="treinoConhecimento1(); calcularConhecimento1()" type="checkbox" disabled name="conhecimento1">
+                                <label for="conhecimento1Treinada">Conhecimento</label>
+                                <select class="redTamMobile" name="habilidade1Conhecimento">
+                                    <option name="nenhum">Nenhum</option>
+                                    <option name="arcano">Arcano</option>
+                                    <option name="engenharia">Engenharia</option>
+                                    <option name="geografia">Geografia</option>
+                                    <option name="historia">História</option>
+                                    <option name="natureza">Natureza</option>
+                                    <option name="nobreza">Nobreza</option>
+                                    <option name="religiao">Religião</option>
+                                    <option name="tormenta">Tormenta</option>
+                                </select>
+                            </div>
+                            <div class="width_10">
+                                <input id="conhecimento1Total" class="caixaInfoPericias" onclick="treinoConhecimento1(); calcularConhecimento1();" type="text" name="conhecimento1Total" readonly>
+                            </div>
+                            <div class="width_40">
+                                <span>=</span>
+                                <input id="graduacaoConhecimento1" class="bonusNivel caixaInfoPericias" onclick="treinoConhecimento1()" type="text" placeholder="Grad." readonly>
+                                <span>+</span>
+                                <input class="modificadorInteligencia caixaInfoPericias" type="text" placeholder="Hab." readonly>
+                                <span>+</span>
+                                <input id="conhecimento1Extra" class="caixaInfoPericias" oninput="calcularConhecimento1()" type="text" placeholder="Outros">
+                            </div>
+                        </div>
+
+                        <div id="conhecimento2" class="container">
+                            <div class="width_50">
+                                <input id="conhecimento2Treinada" class="pericias BRD CLR DRD FET LAD MAG MNG PAL RGR SMR" onclick="treinoConhecimento2(); calcularConhecimento2()" type="checkbox" disabled name="conhecimento2">
+                                <label for="conhecimento2Treinada">Conhecimento</label>
+                                <select class="redTamMobile" name="habilidade2Conhecimento">
+                                    <option name="nenhum">Nenhum</option>
+                                    <option name="arcano">Arcano</option>
+                                    <option name="engenharia">Engenharia</option>
+                                    <option name="geografia">Geografia</option>
+                                    <option name="historia">História</option>
+                                    <option name="natureza">Natureza</option>
+                                    <option name="nobreza">Nobreza</option>
+                                    <option name="religiao">Religião</option>
+                                    <option name="tormenta">Tormenta</option>
+                                </select>
+                            </div>
+                            <div class="width_10">
+                                <input id="conhecimento2Total" class="caixaInfoPericias" onclick="treinoConhecimento2(); calcularConhecimento2();" type="text" name="conhecimento2Total" readonly>
+                            </div>
+                            <div class="width_40">
+                                <span>=</span>
+                                <input id="graduacaoConhecimento2" class="bonusNivel caixaInfoPericias" onclick="treinoConhecimento2()" type="text" placeholder="Grad." readonly>
+                                <span>+</span>
+                                <input class="modificadorInteligencia caixaInfoPericias" type="text" placeholder="Hab." readonly>
+                                <span>+</span>
+                                <input id="conhecimento2Extra" class="caixaInfoPericias" oninput="calcularConhecimento2()" type="text" placeholder="Outros">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="width_33 tabletTo100">
+                        <div class="container titulosPericias hideMobile hideTablet">
+                            <div class="width_50">
+                                <h5>Perícias</h5>
+                            </div>
+                            <div class="width_10">
+                                <h5>Total</h5>
+                            </div>
+                            <div class="width_40">
+                                <h5>Cálculo</h5>
+                            </div>
+                        </div>
+
+                        <div id="cura" class="container">
+                            <div class="width_50">
+                                <input id="curaTreinada" class="pericias CLR DRD MNG PAL RGR" onclick="treinoCura(); calcularCura()" type="checkbox" disabled name="">
+                                <label for="curaTreinada">Cura</label>
+                            </div>
+                            <div class="width_10">
+                                <input id="curaTotal" class="caixaInfoPericias" onclick="treinoCura(); calcularCura()" type="text" name="" readonly>
+                            </div>
+                            <div class="width_40">
+                                <span>=</span>
+                                <input id="graduacaoCura" class="bonusNivel caixaInfoPericias" onclick="treinoCura()" type="text" placeholder="Grad." readonly>
+                                <span>+</span>
+                                <input class="modificadorSabedoria caixaInfoPericias" type="text" placeholder="Hab." readonly>
+                                <span>+</span>
+                                <input id="curaExtra" class="caixaInfoPericias" oninput="calcularCura()" type="text" placeholder="Outros">
+                            </div>
+                        </div>
+
+                        <div id="diplomacia" class="container">
+                            <div class="width_50">
+                                <input id="diplomaciaTreinada" class="pericias BRD CLR DRD LAD MNG PAL SMR SWB" onclick="treinoDiplomacia(); calcularDiplomacia()" type="checkbox" disabled name="">
+                                <label for="diplomaciaTreinada">Diplomacia</label>
+                            </div>
+                            <div class="width_10">
+                                <input id="diplomaciaTotal" class="caixaInfoPericias" onclick="treinoDiplomacia(); calcularDiplomacia()" type="text" name="" readonly>
+                            </div>
+                            <div class="width_40">
+                                <span>=</span>
+                                <input id="graduacaoDiplomacia" class="bonusNivel caixaInfoPericias" onclick="treinoDiplomacia()" type="text" placeholder="Grad." readonly>
+                                <span>+</span>
+                                <input class="modificadorCarisma caixaInfoPericias" type="text" placeholder="Hab." readonly>
+                                <span>+</span>
+                                <input id="diplomaciaExtra" class="caixaInfoPericias" oninput="calcularDiplomacia()" type="text" placeholder="Outros">
+                            </div>
+                        </div>
+
+                        <div id="enganacao" class="container">
+                            <div class="width_50">
+                                <input id="enganacaoTreinada" class="pericias BRD FET LAD SWB" onclick="treinoEnganacao(); calcularEnganacao()" type="checkbox" disabled name="">
+                                <label for="enganacaoTreinada">Enganação</label>
+                            </div>
+                            <div class="width_10">
+                                <input id="enganacaoTotal" class="caixaInfoPericias" onclick="treinoEnganacao(); calcularEnganacao()" type="text" name="" readonly>
+                            </div>
+                            <div class="width_40">
+                                <span>=</span>
+                                <input id="graduacaoEnganacao" class="bonusNivel caixaInfoPericias" onclick="treinoEnganacao()" type="text" placeholder="Grad." readonly>
+                                <span>+</span>
+                                <input class="modificadorCarisma caixaInfoPericias" type="text" placeholder="Hab." readonly>
+                                <span>+</span>
+                                <input id="enganacaoExtra" class="caixaInfoPericias" oninput="calcularEnganacao()" type="text" placeholder="Outros">
+                            </div>
+                        </div>
+
+                        <div id="furtividade" class="container">
+                            <div class="width_50">
+                                <input id="furtividadeTreinada" class="pericias BRD LAD MNG RGR SWB" onclick="treinoFurtividade(); calcularFurtividade()" type="checkbox" disabled name="">
+                                <label for="furtividadeTreinada">Furtividade✣</label>
+                            </div>
+                            <div class="width_10">
+                                <input id="furtividadeTotal" class="caixaInfoPericias" onclick="treinoFurtividade(); calcularFurtividade()" type="text" name="" readonly>
+                            </div>
+                            <div class="width_40">
+                                <span>=</span>
+                                <input id="graduacaoFurtividade" class="bonusNivel caixaInfoPericias" onclick="treinoFurtividade()" type="text" placeholder="Grad." readonly>
+                                <span>+</span>
+                                <input class="modificadorDestreza caixaInfoPericias" type="text" placeholder="Hab." readonly>
+                                <span>+</span>
+                                <input id="furtividadeExtra" class="penalidadeArmadura caixaInfoPericias" oninput="calcularFurtividade()" type="text" placeholder="Outros">
+                            </div>
+                        </div>
+
+                        <div id="identMagia" class="container">
+                            <div class="width_50">
+                                <input id="identMagiaTreinada" class="pericias BRD CLR DRD FET MAG" onclick="treinoIdentMagia(); calcularIdentMagia()" type="checkbox" disabled name="">
+                                <label for="identMagiaTreinada">Identificar Magia*</label>
+                            </div>
+                            <div class="width_10">
+                                <input id="identMagiaTotal" class="caixaInfoPericias" onclick="treinoIdentMagia(); calcularIdentMagia()" type="text" name="" readonly>
+                            </div>
+                            <div class="width_40">
+                                <span>=</span>
+                                <input id="graduacaoIdentMagia" class="bonusNivel caixaInfoPericias" onclick="treinoIdentMagia()" type="text" placeholder="Grad." readonly>
+                                <span>+</span>
+                                <input class="modificadorInteligencia caixaInfoPericias" type="text" placeholder="Hab." readonly>
+                                <span>+</span>
+                                <input id="identMagiaExtra" class="caixaInfoPericias" oninput="calcularIdentMagia()" type="text" placeholder="Outros">
+                            </div>
+                        </div>
+
+                        <div id="iniciativa" class="container">
+                            <div class="width_50">
+                                <input id="iniciativaTreinada" class="pericias BBR BRD GUE LAD MNG PAL RGR SMR SWB" onclick="treinoIniciativa(); calcularIniciativa()" type="checkbox" disabled name="">
+                                <label for="iniciativaTreinada">Iniciativa</label>
+                            </div>
+                            <div class="width_10">
+                                <input id="iniciativaTotal" class="caixaInfoPericias" onclick="treinoIniciativa(); calcularIniciativa()" type="text" name="" readonly>
+                            </div>
+                            <div class="width_40">
+                                <span>=</span>
+                                <input id="graduacaoIniciativa" class="bonusNivel caixaInfoPericias" onclick="treinoIniciativa()" type="text" placeholder="Grad." readonly>
+                                <span>+</span>
+                                <input class="modificadorDestreza caixaInfoPericias" type="text" placeholder="Hab." readonly>
+                                <span>+</span>
+                                <input id="iniciativaExtra" class="caixaInfoPericias" oninput="calcularIniciativa()" type="text" placeholder="Outros">
+                            </div>
+                        </div>
+
+                        <div id="intimidacao" class="container">
+                            <div class="width_50">
+                                <input id="intimidacaoTreinada" class="pericias BBR FET GUE LAD SMR SWB" onclick="treinoIntimidacao(); calcularIntimidacao()" type="checkbox" disabled name="">
+                                <label for="intimidacaoTreinada">Intimidação</label>
+                            </div>
+                            <div class="width_10">
+                                <input id="intimidacaoTotal" class="caixaInfoPericias" onclick="treinoIntimidacao(); calcularIntimidacao()" type="text" name="" readonly>
+                            </div>
+                            <div class="width_40">
+                                <span>=</span>
+                                <input id="graduacaoIntimidacao" class="bonusNivel caixaInfoPericias" onclick="treinoIntimidacao()" type="text" placeholder="Grad." readonly>
+                                <span>+</span>
+                                <input class="modificadorCarisma caixaInfoPericias" type="text" placeholder="Hab." readonly>
+                                <span>+</span>
+                                <input id="intimidacaoExtra" class="caixaInfoPericias" oninput="calcularIntimidacao()" type="text" placeholder="Outros">
+                            </div>
+                        </div>
+
+                        <div id="intuicao" class="container">
+                            <div class="width_50">
+                                <input id="intuicaoTreinada" class="pericias BRD CLR LAD MNG PAL SMR" onclick="treinoIntuicao(); calcularIntuicao()" type="checkbox" disabled name="">
+                                <label for="intuicaoTreinada">Intuição</label>
+                            </div>
+                            <div class="width_10">
+                                <input id="intuicaoTotal" class="caixaInfoPericias" onclick="treinoIntuicao(); calcularIntuicao()" type="text" name="" readonly>
+                            </div>
+                            <div class="width_40">
+                                <span>=</span>
+                                <input id="graduacaoIntuicao" class="bonusNivel caixaInfoPericias" onclick="treinoIntuicao()" type="text" placeholder="Grad." readonly>
+                                <span>+</span>
+                                <input class="modificadorSabedoria caixaInfoPericias" type="text" placeholder="Hab." readonly>
+                                <span>+</span>
+                                <input id="intuicaoExtra" class="caixaInfoPericias" oninput="calcularIntuicao()" type="text" placeholder="Outros">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="width_33 tabletTo100">
+                        <div class="container titulosPericias hideMobile hideTablet">
+                            <div class="width_50">
+                                <h5>Perícias</h5>
+                            </div>
+                            <div class="width_10">
+                                <h5>Total</h5>
+                            </div>
+                            <div class="width_40">
+                                <h5>Cálculo</h5>
+                            </div>
+                        </div>
+
+                        <div id="ladinagem" class="container">
+                            <div class="width_50">
+                                <input id="ladinagemTreinada" class="pericias BRD LAD" onclick="treinoLadinagem(); calcularLadinagem()" type="checkbox" disabled name="">
+                                <label for="ladinagemTreinada">Ladinagem*✣</label>
+                            </div>
+                            <div class="width_10">
+                                <input id="ladinagemTotal" class="caixaInfoPericias" onclick="treinoLadinagem(); calcularLadinagem()" type="text" name="" readonly>
+                            </div>
+                            <div class="width_40">
+                                <span>=</span>
+                                <input id="graduacaoLadinagem" class="bonusNivel caixaInfoPericias" onclick="treinoLadinagem()" type="text" placeholder="Grad." readonly>
+                                <span>+</span>
+                                <input class="modificadorDestreza caixaInfoPericias" type="text" placeholder="Hab." readonly>
+                                <span>+</span>
+                                <input id="ladinagemExtra" class="penalidadeArmadura caixaInfoPericias" oninput="calcularLadinagem()" type="text" placeholder="Outros">
+                            </div>
+                        </div>
+
+                        <div id="obterInfo" class="container">
+                            <div class="width_50">
+                                <input id="obterInfoTreinada" class="pericias BRD LAD SWB" onclick="treinoObterInfo(); calcularObterInfo()" type="checkbox" disabled name="">
+                                <label for="obterInfoTreinada">Obter Informação</label>
+                            </div>
+                            <div class="width_10">
+                                <input id="obterInfoTotal" class="caixaInfoPericias" onclick="treinoObterInfo(); calcularObterInfo()" type="text" name="" readonly>
+                            </div>
+                            <div class="width_40">
+                                <span>=</span>
+                            <input id="graduacaoObterInfo" class="bonusNivel caixaInfoPericias" onclick="treinoObterInfo()" type="text" placeholder="Grad." readonly>
+                            <span>+</span>
+                            <input class="modificadorCarisma caixaInfoPericias" type="text" placeholder="Hab." readonly>
+                            <span>+</span>
+                            <input id="obterInfoExtra" class="caixaInfoPericias" oninput="calcularObterInfo()" type="text" placeholder="Outros">
+                            </div>
+                        </div>
+
+                        <div id="oficio1" class="container">
+                            <div class="width_50">
+                                <input id="oficio1Treinada" class="pericias BBR CLR DRD FET GUE LAD MAG MNG PAL RGR SMR SWB" onclick="treinoOficio1(); calcularOficio1()" type="checkbox" disabled name="">
+                                <label for="oficio1Treinada">Ofício</label>
+                                <select name="">
+                                    <option name="nenhum">Nenhum</option>
+                                    <option name="">Alquimia</option>
+                                    <option name="">Alvenaria</option>
+                                    <option name="">Carpintaria</option>
+                                    <option name="">Joalheria</option>
+                                    <option name="">Metalurgia</option>
+                                    <option name="">Um tipo de arte</option>
+                                    <option name="">Uma profissão</option>
+                                </select>
+                            </div>
+                            <div class="width_10">
+                                <input id="oficio1Total" class="caixaInfoPericias caixaInfoPericias" onclick="treinoOficio1(); calcularOficio1()" type="text" name="" readonly>
+                            </div>
+                            <div class="width_40">
+                                <span>=</span>
+                                <input id="graduacaoOficio1" class="bonusNivel caixaInfoPericias" onclick="treinoOficio1()" type="text" placeholder="Grad." readonly>
+                                <span>+</span>
+                                <input class="modificadorInteligencia caixaInfoPericias" type="text" placeholder="Hab." readonly>
+                                <span>+</span>
+                                <input id="oficio1Extra" class="caixaInfoPericias" oninput="calcularOficio1()" type="text" placeholder="Outros">
+                            </div>
+                        </div>
+
+                        <div id="oficio2" class="container">
+                            <div class="width_50">
+                                <input id="oficio2Treinada" class="pericias BBR CLR DRD FET GUE LAD MAG MNG PAL RGR SMR SWB" onclick="treinoOficio2(); calcularOficio2()" type="checkbox" disabled name="">
+                                <label for="oficio2Treinada">Ofício</label>
+                                <select name="">
+                                    <option name="nenhum">Nenhum</option>
+                                    <option name="">Alquimia</option>
+                                    <option name="">Alvenaria</option>
+                                    <option name="">Carpintaria</option>
+                                    <option name="">Joalheria</option>
+                                    <option name="">Metalurgia</option>
+                                    <option name="">Um tipo de arte</option>
+                                    <option name="">Uma profissão</option>
+                                </select>
+                            </div>
+                            <div class="width_10">
+                                <input id="oficio2Total" class="caixaInfoPericias caixaInfoPericias" onclick="treinoOficio2(); calcularOficio2()" type="text" name="" readonly>
+                            </div>
+                            <div class="width_40">
+                                <span>=</span>
+                                <input id="graduacaoOficio2" class="bonusNivel caixaInfoPericias" onclick="treinoOficio2()" type="text" placeholder="Grad." readonly>
+                                <span>+</span>
+                                <input class="modificadorInteligencia caixaInfoPericias" type="text" placeholder="Hab." readonly>
+                                <span>+</span>
+                                <input id="oficio2Extra" class="caixaInfoPericias" oninput="calcularOficio2()" type="text" placeholder="Outros">
+                            </div>
+                        </div>
+
+                        <div id="percepcao" class="container">
+                            <div class="width_50">
+                                <input id="percepcaoTreinada" class="pericias BBR BRD DRD GUE LAD MAG MNG RGR SMR SWB" onclick="treinoPercepcao(); calcularPercepcao()" type="checkbox" disabled name="">
+                                <label for="percepcaoTreinada">Percepção</label>
+                            </div>
+                            <div class="width_10">
+                                <input id="percepcaoTotal" class="caixaInfoPericias" onclick="treinoPercepcao(); calcularPercepcao()" type="text" name="" readonly>
+                            </div>
+                            <div class="width_40">
+                                <span>=</span>
+                                <input id="graduacaoPercepcao" class="bonusNivel caixaInfoPericias" onclick="treinoPercepcao()" type="text" placeholder="Grad." readonly>
+                                <span>+</span>
+                                <input class="modificadorSabedoria caixaInfoPericias" type="text" placeholder="Hab." readonly>
+                                <span>+</span>
+                                <input id="percepcaoExtra" class="caixaInfoPericias" oninput="calcularPercepcao()" type="text" placeholder="Outros">
+                            </div>
+                        </div>
+
+                        <div id="sobrevivencia" class="container">
+                            <div class="width_50">
+                                <input id="sobrevivenciaTreinada" class="pericias BBR DRD RGR" onclick="treinoSobrevivencia(); calcularSobrevivencia()" type="checkbox" disabled name="">
+                                <label for="sobrevivenciaTreinada">Sobrevivência</label>
+                            </div>
+                            <div class="width_10">
+                                <input id="sobrevivenciaTotal" class="caixaInfoPericias" onclick="treinoSobrevivencia(); calcularSobrevivencia()" type="text" name="" readonly>
+                            </div>
+                            <div class="width_40">
+                                <span>=</span>
+                                <input id="graduacaoSobrevivencia" class="bonusNivel caixaInfoPericias" onclick="treinoSobrevivencia()" type="text" placeholder="Grad." readonly>
+                                <span>+</span>
+                                <input class="modificadorSabedoria caixaInfoPericias" type="text" placeholder="Hab." readonly>
+                                <span>+</span>
+                                <input id="sobrevivenciaExtra" class="caixaInfoPericias" oninput="calcularSobrevivencia()" type="text" placeholder="Outros">
+                            </div>
+                        </div>
+
+                        <div id="periciaExtra1" class="container">
+                            <div class="width_50">
+                                <input id="periciaExtra1Treinada" onclick="treinoPericiaExtra1(); calcularPericiaExtra1()" type="checkbox" name="">
+                                <label for="periciaExtra1Treinada"><input type="text" size="15"></label>
+                            </div>
+                            <div class="width_10">
+                                <input id="periciaExtra1Total" class="caixaInfoPericias" onclick="treinoPericiaExtra1(); calcularPericiaExtra1()" type="text" name="" readonly>
+                            </div>
+                            <div class="width_40">
+                                <span>=</span>
+                                <input id="graduacaoPericiaExtra1" class="bonusNivel caixaInfoPericias" onclick="treinoPericiaExtra1()" type="text" placeholder="Grad." readonly>
+                                <span>+</span>
+                                <input id="modificadorPericiaExtra1" class="caixaInfoPericias" type="text" placeholder="Hab.">
+                                <span>+</span>
+                                <input id="periciaExtra1Extra" class="caixaInfoPericias" oninput="calcularPericiaExtra1()" type="text" placeholder="Outros">
+                            </div>
+                        </div>
+
+                        <div id="periciaExtra2" class="container">
+                            <div class="width_50">
+                                <input id="periciaExtra2Treinada" onclick="treinoPericiaExtra2(); calcularPericiaExtra2()" type="checkbox" name="">
+                                <label for="periciaExtra2Treinada"><input type="text" size="15"></label>
+                            </div>
+                            <div class="width_10">
+                                <input id="periciaExtra2Total" class="caixaInfoPericias" onclick="treinoPericiaExtra2(); calcularPericiaExtra2()" type="text" name="" readonly>
+                            </div>
+                            <div class="width_40">
+                                <span>=</span>
+                            <input id="graduacaoPericiaExtra2" class="bonusNivel caixaInfoPericias" onclick="treinoPericiaExtra2()" type="text" placeholder="Grad." readonly>
+                            <span>+</span>
+                            <input id="modificadorPericiaExtra2" class="caixaInfoPericias" type="text" placeholder="Hab.">
+                            <span>+</span>
+                            <input id="periciaExtra2Extra" class="caixaInfoPericias" oninput="calcularPericiaExtra2()" type="text" placeholder="Outros">
+                            </div>
+                        </div>
+                    </div>
+                    <h5>✣ = Penalidade na Armadura / * = Somente Treinada</h5>
+                </div>
+
+                <div class="container" id="ataques">
+                    <div class="width_25 tabletTo50" id="ataqueCorpo">
+                        <div class="container">
+                            <div class="width_18">
+                                <h5>Ataque</h5>
+                            </div>
+                            <div class="width_10">
+                                <h5>Total</h5>
+                            </div>
+                            <div class="width_72">
+                                <h5>Cálculo</h5>
+                            </div>
+                        </div>
+                        <div class="container">
+                            <div class="width_18">
+                                <label for="">Fisico</label>
+                            </div>
+                            <div class="width_10">
+                                <input id="totalAtaqueCorpo" onclick="calcularAtaqueCorpo()" type="text" name="totalAtaqueCorpo" readonly>
+                            </div>
+                            <div class="width_72">
+                                <span> = </span>
+                                <input class="bbaAtual" onclick="calcularAtaqueCorpo()" type="text" name="" placeholder="BBA" readonly>
+                                <span> + </span>
+                                <input class="modificadorForca" onclick="calcularAtaqueCorpo()" type="text" name="" placeholder="Hab" readonly>
+                                <span> + </span>
+                                <input id="modTamAtaqueCorpo" oninput="calcularAtaqueCorpo()" type="text" name="modTamAtaqueCorpo" placeholder="Tam">
+                                <span> + </span>
+                                <input id="extraAtaqueCorpo" oninput="calcularAtaqueCorpo()" type="text" name="extraAtaqueCorpo" placeholder="Outros">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="width_25 tabletTo50" id="ataqueDistancia">
+                        <div class="container">
+                            <div class="width_18">
+                                <h5>Ataque</h5>
+                            </div>
+                            <div class="width_10">
+                                <h5>Total</h5>
+                            </div>
+                            <div class="width_72">
+                                <h5>Cálculo</h5>
+                            </div>
+                        </div>
+                        <div class="container">
+                            <div class="width_18">
+                                <label for="">Distância</label>
+                            </div>
+                            <div class="width_10">
+                                <input id="totalAtaqueDistancia" onclick="calcularAtaqueDistancia()" type="text" name="totalAtaqueDistancia" readonly>
+                            </div>
+                            <div class="width_72">
+                                <span> = </span>
+                                <input class="bbaAtual" onclick="calcularAtaqueDistancia()" type="text" name="" placeholder="BBA" readonly>
+                                <span> + </span>
+                                <input class="modificadorDestreza" onclick="calcularAtaqueDistancia()" type="text" name="" placeholder="Hab" readonly>
+                                <span> + </span>
+                                <input id="modTamAtaqueDistancia" oninput="calcularAtaqueDistancia()" type="text" name="modTamAtaqueDistancia" placeholder="Tam">
+                                <span> + </span>
+                                <input id="extraAtaqueDistancia" oninput="calcularAtaqueDistancia()" type="text" name="extraAtaqueDistancia" placeholder="Outros">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container" id="equipaveisVestidos">
+                    <div class="width_60 tabletTo100">
+                        <div class="container titulosEquipamentos">
+                            <div class="width_40 mobileTo25 centerMobile">
+                                <h5>Armas</h5>
+                            </div>
+                            <div class="width_20 mobileTo15 center">
+                                <h5>Bônus de Ataque</h5>
+                            </div>
+                            <div class="width_10 mobileTo15 center">
+                                <h5>Dano</h5>
+                            </div>
+                            <div class="width_10 mobileTo15 center">
+                                <h5>Crítico</h5>
+                            </div>
+                            <div class="width_10 mobileTo15 center">
+                                <h5>Distância</h5>
+                            </div>
+                            <div class="width_10 mobileTo15 center">
+                                <h5>Tipo</h5>
+                            </div>
+                        </div>
+                        <div class="container">
+                            <div class="width_40 mobileTo25 centerMobile nomeArmas">
+                                <input id="nomeArmaEspaco1" type="text" name="nomeArmaEspaco1">
+                            </div>
+                            <div class="width_20 mobileTo15 center">
+                                <input id="ataqueArmaEspaco1" type="text" name="ataqueArmaEspaco1">
+                            </div>
+                            <div class="width_10 mobileTo15 center">
+                                <input id="danoArmaEspaco1" type="text" name="danoArmaEspaco1">
+                            </div>
+                            <div class="width_10 mobileTo15 center">
+                                <input id="criticoArmaEspaco1" type="text" name="criticoArmaEspaco1">
+                            </div>
+                            <div class="width_10 mobileTo15 center">
+                                <input id="distanciaArmaEspaco1" type="text" name="distanciaArmaEspaco1">
+                            </div>
+                            <div class="width_10 mobileTo15 center">
+                                <input id="tipoArmaEspaco1" type="text" name="tipoArmaEspaco1">
+                            </div>
+                        </div>
+                        <div class="container">
+                            <div class="width_40 mobileTo25 centerMobile nomeArmas">
+                                <input id="nomeArmaEspaco2" type="text" name="nomeArmaEspaco2">
+                            </div>
+                            <div class="width_20 mobileTo15 center">
+                                <input id="ataqueArmaEspaco2" type="text" name="ataqueArmaEspaco2">
+                            </div>
+                            <div class="width_10 mobileTo15 center">
+                                <input id="danoArmaEspaco2" type="text" name="danoArmaEspaco2">
+                            </div>
+                            <div class="width_10 mobileTo15 center">
+                                <input id="criticoArmaEspaco2" type="text" name="criticoArmaEspaco2">
+                            </div>
+                            <div class="width_10 mobileTo15 center">
+                                <input id="distanciaArmaEspaco2" type="text" name="distanciaArmaEspaco2">
+                            </div>
+                            <div class="width_10 mobileTo15 center">
+                                <input id="tipoArmaEspaco2" type="text" name="tipoArmaEspaco2">
+                            </div>
+                        </div>
+                        <div class="container">
+                            <div class="width_40 mobileTo25 centerMobile nomeArmas">
+                                <input id="nomeArmaEspaco3" type="text" name="nomeArmaEspaco3">
+                            </div>
+                            <div class="width_20 mobileTo15 center">
+                                <input id="ataqueArmaEspaco3" type="text" name="ataqueArmaEspaco3">
+                            </div>
+                            <div class="width_10 mobileTo15 center">
+                                <input id="danoArmaEspaco3" type="text" name="danoArmaEspaco3">
+                            </div>
+                            <div class="width_10 mobileTo15 center">
+                                <input id="criticoArmaEspaco3" type="text" name="criticoArmaEspaco3">
+                            </div>
+                            <div class="width_10 mobileTo15 center">
+                                <input id="distanciaArmaEspaco3" type="text" name="distanciaArmaEspaco3">
+                            </div>
+                            <div class="width_10 mobileTo15 center">
+                                <input id="tipoArmaEspaco3" type="text" name="tipoArmaEspaco3">
+                            </div>
+                        </div>
+                        <div class="container">
+                            <div class="width_40 mobileTo25 centerMobile nomeArmas">
+                                <input id="nomeArmaEspaco4" type="text" name="nomeArmaEspaco4">
+                            </div>
+                            <div class="width_20 mobileTo15 center">
+                                <input id="ataqueArmaEspaco4" type="text" name="ataqueArmaEspaco4">
+                            </div>
+                            <div class="width_10 mobileTo15 center">
+                                <input id="danoArmaEspaco4" type="text" name="danoArmaEspaco4">
+                            </div>
+                            <div class="width_10 mobileTo15 center">
+                                <input id="criticoArmaEspaco4" type="text" name="criticoArmaEspaco4">
+                            </div>
+                            <div class="width_10 mobileTo15 center">
+                                <input id="distanciaArmaEspaco4" type="text" name="distanciaArmaEspaco4">
+                            </div>
+                            <div class="width_10 mobileTo15 center">
+                                <input id="tipoArmaEspaco4" type="text" name="tipoArmaEspaco4">
+                            </div>
+                        </div>
+                        <div class="container">
+                            <div class="width_40 mobileTo25 centerMobile nomeArmas">
+                                <input id="nomeArmaEspaco5" type="text" name="nomeArmaEspaco5">
+                            </div>
+                            <div class="width_20 mobileTo15 center">
+                                <input id="ataqueArmaEspaco5" type="text" name="ataqueArmaEspaco5">
+                            </div>
+                            <div class="width_10 mobileTo15 center">
+                                <input id="danoArmaEspaco5" type="text" name="danoArmaEspaco5">
+                            </div>
+                            <div class="width_10 mobileTo15 center">
+                                <input id="criticoArmaEspaco5" type="text" name="criticoArmaEspaco5">
+                            </div>
+                            <div class="width_10 mobileTo15 center">
+                                <input id="distanciaArmaEspaco5" type="text" name="distanciaArmaEspaco5">
+                            </div>
+                            <div class="width_10 mobileTo15 center">
+                                <input id="tipoArmaEspaco5" type="text" name="tipoArmaEspaco5">
+                            </div>
+                        </div>
+                        <div class="container">
+                            <div class="width_40 mobileTo25 centerMobile nomeArmas">
+                                <input id="nomeArmaEspaco6" type="text" name="nomeArmaEspaco6">
+                            </div>
+                            <div class="width_20 mobileTo15 center">
+                                <input id="ataqueArmaEspaco6" type="text" name="ataqueArmaEspaco6">
+                            </div>
+                            <div class="width_10 mobileTo15 center">
+                                <input id="danoArmaEspaco6" type="text" name="danoArmaEspaco6">
+                            </div>
+                            <div class="width_10 mobileTo15 center">
+                                <input id="criticoArmaEspaco6" type="text" name="criticoArmaEspaco6">
+                            </div>
+                            <div class="width_10 mobileTo15 center">
+                                <input id="distanciaArmaEspaco6" type="text" name="distanciaArmaEspaco6">
+                            </div>
+                            <div class="width_10 mobileTo15 center">
+                                <input id="tipoArmaEspaco6" type="text" name="tipoArmaEspaco6">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="width_40 tabletTo100">
+                        <div class="container">
+                            <div class="width_40 centerMobile mobileTo25">
+                                <h5>Armaduras</h5>
+                            </div>
+                            <div class="width_15 center mobileTo25">
+                                <h5>Bônus na CA</h5>
+                            </div>
+                            <div class="width_25 center mobileTo25">
+                                <h5>Máx. de Destreza</h5>
+                            </div>
+                            <div class="width_20 center mobileTo25">
+                                <h5>Pen. de Armadura</h5>
+                            </div>
+                        </div>
+                        <div class="container">
+                            <div class="width_40 mobileTo25 nomeArmaduraEscudoOutros">
+                                <input id="nomeArmadura" type="text" name="nomeArmadura" placeholder="Armadura: Cota de Malha">
+                            </div>
+                            <div class="width_15 center mobileTo25">
+                                <input id="bonusClasseArmadura" oninput="valorArmadura()" type="text" name="bonusClasseArmadura">
+                            </div>
+                            <div class="width_25 center mobileTo25">
+                                <input id="limiteDesArmadura" oninput="limiteDestreza()" type="text" name="limiteDestrezaArmadura">
+                            </div>
+                            <div class="width_20 center mobileTo25">
+                                <input id="penalidadePerArmadura" oninput="penalidadePericias()" type="text" name="penalidadePerArmadura">
+                            </div>
+                        </div>
+                        <div class="container">
+                            <div class="width_40 mobileTo25 nomeArmaduraEscudoOutros">
+                                <input id="nomeEscudo" type="text" name="nomeEscudo" placeholder="Escudo: Escudo Torre">
+                            </div>
+                            <div class="width_15 center mobileTo25">
+                                <input id="bonusClasseEscudo" oninput="valorEscudo()" type="text" name="bonusClasseEscudo">
+                            </div>
+                            <div class="width_25 center mobileTo25">
+                                <input id="limiteDesEscudo" oninput="limiteDestreza()" type="text" name="limiteDestrezaEscudo">
+                            </div>
+                            <div class="width_20 center mobileTo25">
+                                <input id="penalidadePerEscudo" oninput="penalidadePericias()" type="text" name="penalidadePerEscudo">
+                            </div>
+                        </div>
+                        <div class="container">
+                            <div class="width_40 mobileTo25 nomeArmaduraEscudoOutros">
+                                <input id="itemExtra1" type="text" name="itemExtra1" placeholder="Outros:">
+                            </div>
+                            <div class="width_15 center mobileTo25">
+                                <input id="bonusCAExtra1" oninput="calcularBonusDefesa()" type="text" name="bonusCAExtra1">
+                            </div>
+                            <div class="width_25 center mobileTo25">
+                                <input id="limiteDesExtra1" oninput="limiteDestreza()" type="text" name="limiteDestrezaExtra1">
+                            </div> 
+                            <div class="width_20 center mobileTo25">
+                                <input id="penalidadePerExtra1" oninput="penalidadePericias()" type="text" name="penalidadePerExtra1">
+                            </div>
+                        </div>
+                        <div class="container">
+                            <div class="width_40 mobileTo25 nomeArmaduraEscudoOutros">
+                                <input id="itemExtra2" type="text" name="itemExtra2" placeholder="Outros:">
+                            </div>
+                            <div class="width_15 center mobileTo25">
+                                <input id="bonusCAExtra2" oninput="calcularBonusDefesa()" type="text" name="bonusCAExtra2">
+                            </div>
+                            <div class="width_25 center mobileTo25">
+                                <input id="limiteDesExtra2" oninput="limiteDestreza()" type="text" name="limiteDestrezaExtra2">
+                            </div>
+                            <div class="width_20 center mobileTo25">
+                                <input id="penalidadePerExtra2" oninput="penalidadePericias()" type="text" name="penalidadePerExtra2">
+                            </div>
+                        </div>
+                        <div class="container">
+                            <div class="width_40 mobileTo25 nomeArmaduraEscudoOutros">
+                                <input id="itemExtra3" type="text" name="itemExtra3" placeholder="Outros:">
+                            </div>
+                            <div class="width_15 center mobileTo25">
+                                <input id="bonusCAExtra3" oninput="calcularBonusDefesa()" type="text" name="bonusCAExtra3">
+                            </div>
+                            <div class="width_25 center mobileTo25">
+                                <input id="limiteDesExtra3" oninput="limiteDestreza()" type="text" name="limiteDestrezaExtra3">
+                            </div>
+                            <div class="width_20 center mobileTo25">
+                                <input id="penalidadePerExtra3" oninput="penalidadePericias()" type="text" name="penalidadePerExtra3">
+                            </div>
+                        </div>
+                        <div class="container">
+                            <div class="width_40 mobileTo25 nomeArmaduraEscudoOutros">
+                                <input id="itemExtra4" type="text" name="itemExtra4" placeholder="Outros:">
+                            </div>
+                            <div class="width_15 center mobileTo25">
+                                <input id="bonusCAExtra4" oninput="calcularBonusDefesa()" type="text" name="bonusCAExtra4">
+                            </div>
+                            <div class="width_25 center mobileTo25">
+                                <input id="limiteDesExtra4" oninput="limiteDestreza()" type="text" name="limiteDestrezaExtra4">
+                            </div>
+                            <div class="width_20 center mobileTo25">
+                                <input id="penalidadePerExtra4" oninput="penalidadePericias()" type="text" name="penalidadePerExtra4">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </section>
+    </body>
+</html>

@@ -1,0 +1,411 @@
+body {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    margin: 0 0 35px;
+}
+
+section{
+    width: 80%;
+    margin: auto;    
+}
+
+h1 {
+    font-size: 30px;
+}
+
+label, select {
+    font-size: 15px;
+}
+
+h5 {
+    font-size: 14px;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.width_10 {
+    width: 10%;
+}
+
+.width_15 {
+    width: 15%;
+}
+
+.width_18 {
+    width: 18%;
+}
+
+.width_20 {
+    width: 20%;
+}
+
+.width_21 {
+    width: 21%;
+}
+
+.width_25 {
+    width: 25%;
+}
+
+.width_29 {
+    width: 29%;
+}
+
+.width_30 {
+    width: 30%;
+}
+
+.width_33 {
+    width: 33%;
+}
+
+.width_40 {
+    width: 40%;
+}
+
+.width_50 {
+    width: 50%;
+}
+
+.width_55{
+    width: 55%;
+}
+
+.width_60 {
+    width: 60%;
+}
+
+.width_72 {
+    width: 67%;
+}
+
+.width_100 {
+    width: 100%;
+}
+
+.infoBasicas input, #equipaveisVestidos div input{
+    height: 20px;
+    border-top: 2px solid transparent;
+    border-left:  2px solid transparent;
+    border-right:  2px solid transparent;
+}
+
+.infoBasicas select {
+    height: 26px;
+    border-top: 2px solid transparent;
+    border-left:  2px solid transparent;
+    border-right:  2px solid transparent;
+    border-bottom: 2px solid black;
+}
+
+#nomePersonagem {
+    width: 240px;
+}
+
+.habilidades div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#infoFisico div input {
+    width: 30px;
+    height: 30px;
+    margin: 5px 0px;
+    text-align: center;
+}
+
+#infoFisico div div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#infoFisico .width_60 {
+    justify-content: space-evenly;
+}
+
+#infoPericias .width_10 {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+#infoPericias .width_40 {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+#infoPericias .width_40 {
+    display: flex;
+    align-items: center;
+}
+
+#infoPericias .width_50 {
+    display: flex;
+    align-items: center;
+}
+
+#infoPericias span {
+    margin: 0;
+}
+
+.caixaInfoPericias {
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    margin: 5px 0px;
+}
+
+#ataques {
+    justify-content: space-evenly;
+}
+
+#ataqueCorpo div .width_18 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#ataqueCorpo div .width_72 {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+#ataqueCorpo input, #ataqueDistancia input {
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    margin: 5px 0px;
+}
+
+#ataqueDistancia div .width_18 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#ataqueDistancia div .width_72 {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+#equipaveisVestidos .center {
+    display: flex;
+    justify-content: center;
+}
+
+#equipaveisVestidos div input{
+    width: 50px;
+    text-align: center;
+}
+
+.nomeArmas input {
+    width: 350px !important; 
+    text-align: left !important;
+}
+
+.nomeArmaduraEscudoOutros input{
+    width: 192px !important; 
+    text-align: left !important;
+}
+
+.hideDesktop {
+    display: none;
+}
+
+@media screen and (max-width: 1400px) {
+    section {
+        width: 95%;
+    }
+    
+    #nomePersonagem {
+        width: 180px;
+    }
+
+    .tabletTo42 {
+        width: 42%;
+    }
+
+    .tabletTo50 {
+        width: 50%;
+    }
+
+    .tabletTo58 {
+        width: 58%;
+    }
+
+    .tabletTo100 {
+        width: 100%;
+    }
+
+    #infoFisico .width_60 span, #infoPericias span, .calculoPericias span, #ataques div span {
+        display: none;
+    }
+    
+    .hideTablet {
+        display: none !important;
+    }
+
+    .nomeArmas input, .nomeArmaduraEscudoOutros input {
+        width: 90% !important;
+    }
+}
+
+@media screen and (max-width: 670px) {
+    section {
+        width: 95%;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+    
+    label, select, option {
+        font-size: 13px;
+    }
+    
+    h5 {
+        font-size: 13px;
+    }
+
+    #nomePersonagem {
+        width: 100px;
+    }
+
+    #nomeJogador {
+        width: 100px;
+    }
+
+    #tendenciaPersonagem {
+        width: 140px;
+    }
+
+    #sexoPersonagem {
+        width: 80px;
+    }
+
+    .hideDesktop {
+        display: block !important;
+    }
+
+    .hideMobile {
+        display: none !important;
+    }
+
+    #idadePersonagem {
+        width: 50px;
+    }
+
+    #divindadePersonagem {
+        width: 100px;
+    }
+
+    #tamanhoPersonagem {
+        width: 40px;
+    }
+
+    #deslocamentoPersonagem {
+        width: 30px;
+    }
+
+    .width_20, .width_25, .width_33, .width_55, .width_75 {
+        width: 100%;
+    }
+
+    .titleMobile {
+        font-size: 15px;
+    }
+
+    .mobileTo10 {
+        width: 10% !important;
+    }
+
+    .mobileTo12 {
+        width: 12% !important;
+    }
+
+    .mobileTo15 {
+        width: 15% !important;
+    }
+
+    .mobileTo20 {
+        width: 20% !important;
+    }
+
+    .mobileTo25 {
+        width: 25% !important;
+    }
+
+    .mobileTo76 {
+        width: 76% !important;
+    }
+
+    #infoFisico .width_60 span, #infoPericias span, .calculoPericias span, #ataques div span {
+        display: none;
+    }
+
+    #infoPericias .width_40 {
+        justify-content: space-evenly;
+    }
+
+    #infoPericias .redTamMobile {
+        width: 70px;
+    }
+
+    #infoPericias .totalPericias input {
+        width: 20px;
+        height: 20px;
+        margin: 3px; 
+    }
+    
+    #infoPericias .calculoPericias input {
+        width: 20px;
+        height: 20px;
+        margin: 3px;
+    }
+
+    #equipaveisVestidos h5{
+        text-align: center;
+    }
+
+    .titulosEquipamentos .centerMobile {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #equipaveisVestidos .centerMobile {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #equipaveisVestidos .width_60 {
+        width: 100%;
+    }
+
+    #equipaveisVestidos .width_40 {
+        width: 100%;
+    }
+
+    #equipaveisVestidos .center {
+        align-items: center;
+    }
+
+    #equipaveisVestidos .center input {
+        width: 40px !important;
+    }
+
+    .nomeArmas input {
+        width: 85px !important;
+    }
+
+    .nomeArmaduraEscudoOutros input {
+        width: 90px !important;
+    }
+}
