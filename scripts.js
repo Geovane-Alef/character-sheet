@@ -115,15 +115,8 @@ function bbaDiferente() {
 function metadeNivel() {
     var nivel = parseInt(document.getElementById("nivelPersonagem").value);
     
-    let metade;
-
-    if (nivel % 2 === 0) {
-        // Se for par, divide por 2
-        metade = nivel / 2;
-    } else {
-        // Se for ímpar, subtrai 1 e divide por 2
-        metade = (nivel - 1) / 2;
-    }
+    //operador ternário
+    let metade = nivel % 2 === 0 ? nivel / 2 : (nivel - 1) / 2;
 
     var camposResultado = document.querySelectorAll(".bonusNivel");
     camposResultado.forEach(function(campo) {
