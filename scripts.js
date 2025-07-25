@@ -12,7 +12,9 @@ var modificadores = {
     20: 5, 21: 5,
     22: 6, 23: 6,
     24: 7, 25: 7,
-    26: 8, 27: 8
+    26: 8, 27: 8,
+    28: 9, 29: 9,
+    30: 10
 };
 
 function classeEscolhida() {
@@ -131,7 +133,8 @@ function metadeNivel() {
 function converterForca() {
     var numero = parseInt(document.getElementById("valorForca").value);
 
-    var modificador = modificadores[numero] !== undefined ? modificadores[numero] : 9;
+    //operador ternário
+    var modificador = modificadores[numero] !== undefined ? modificadores[numero] : -6;
 
     var camposResultado = document.querySelectorAll(".modificadorForca");
     
@@ -145,7 +148,7 @@ function converterForca() {
 function converterDestreza() {
     var numero = parseInt(document.getElementById("valorDestreza").value);
 
-    var modificador = modificadores[numero] !== undefined ? modificadores[numero] : 9;
+    var modificador = modificadores[numero] !== undefined ? modificadores[numero] : -6;
 
     var camposResultado = document.querySelectorAll(".modificadorDestreza");
     
@@ -159,7 +162,7 @@ function converterDestreza() {
 function converterConstituicao() {
     var numero = parseInt(document.getElementById("valorConstituicao").value);
 
-    var modificador = modificadores[numero] !== undefined ? modificadores[numero] : 9;
+    var modificador = modificadores[numero] !== undefined ? modificadores[numero] : -6;
 
     var camposResultado = document.querySelectorAll(".modificadorConstituicao");
     
@@ -173,7 +176,7 @@ function converterConstituicao() {
 function converterInteligencia() {
     var numero = parseInt(document.getElementById("valorInteligencia").value);
 
-    var modificador = modificadores[numero] !== undefined ? modificadores[numero] : 9;
+    var modificador = modificadores[numero] !== undefined ? modificadores[numero] : -6;
 
     var camposResultado = document.querySelectorAll(".modificadorInteligencia");
     
@@ -185,7 +188,7 @@ function converterInteligencia() {
 function converterSabedoria() {
     var numero = parseInt(document.getElementById("valorSabedoria").value);
 
-    var modificador = modificadores[numero] !== undefined ? modificadores[numero] : 9;
+    var modificador = modificadores[numero] !== undefined ? modificadores[numero] : -6;
 
     var camposResultado = document.querySelectorAll(".modificadorSabedoria");
     
@@ -199,7 +202,7 @@ function converterSabedoria() {
 function converterCarisma() {
     var numero = parseInt(document.getElementById("valorCarisma").value);
 
-    var modificador = modificadores[numero] !== undefined ? modificadores[numero] : 9;
+    var modificador = modificadores[numero] !== undefined ? modificadores[numero] : -6;
 
     var camposResultado = document.querySelectorAll(".modificadorCarisma");
     
@@ -256,577 +259,29 @@ function calcularVontade() {
     document.getElementById("totalVontade").value = vontadeDefinida;
 }
 
-function treinoAcrobacia() {
-    var treinada = document.getElementById("acrobaciaTreinada").checked;
+function calcularPericia(pericia, habilidade) {
+    const nivel = parseInt(document.getElementById("nivelPersonagem").value) || 0;
+    console.log(nivel);
+    const treinada = document.getElementById(`${pericia}Treinada`).checked;
+    console.log(treinada);
+    const graduacao = treinada == true ? (nivel + 3) : Math.floor(nivel / 2);
+    document.getElementById(`graduacao${capitalize(pericia)}`).value = graduacao;
+    console.log(graduacao);
+    const modificadorElement = document.getElementsByClassName(`modificador${capitalize(habilidade)}`)[0];
+    console.log(modificadorElement);
+    const modificador = modificadorElement ? parseInt(modificadorElement.value) || 0 : 0;
+    console.log(modificador);
 
-    if (treinada) {
-        var nivel = parseInt(document.getElementById("nivelPersonagem").value) || 0;
+    const outros = parseInt(document.getElementById(`${pericia}Extra`).value) || 0;
+    console.log(outros);
 
-        var periciaGraduada = nivel + 3;
-
-        document.getElementById("graduacaoAcrobacia").value = periciaGraduada;
-    } else {
-        var nivel = parseInt(document.getElementsByClassName("bonusNivel")[0].value);
-
-        document.getElementById("graduacaoAcrobacia").value = nivel;
-    }
-
+    const total = graduacao + modificador + outros;
+    document.getElementById(`${pericia}Total`).value = total;
+    console.log(total);
 }
 
-function calcularAcrobacia() {
-    var graduacao = parseInt(document.getElementById("graduacaoAcrobacia").value) || 0;
-    var modificadorDestreza = parseInt(document.getElementsByClassName("modificadorDestreza")[0].value) || 0;
-    var acrobaciaExtra = parseInt(document.getElementById("acrobaciaExtra").value) || 0;
-
-    var soma = graduacao + modificadorDestreza + acrobaciaExtra;
-
-    document.getElementById("acrobaciaTotal").value = soma;
-}
-
-function treinoAdestrar() {
-    var treinada = document.getElementById("adestrarTreinada").checked;
-
-    if (treinada) {
-        var nivel = parseInt(document.getElementById("nivelPersonagem").value) || 0;
-
-        var periciaGraduada = nivel + 3;
-
-        document.getElementById("graduacaoAdestrar").value = periciaGraduada;
-    } else {
-        var nivel = parseInt(document.getElementsByClassName("bonusNivel")[0].value);
-
-        document.getElementById("graduacaoAdestrar").value = nivel;
-    }
-}
-
-function calcularAdestrar() {
-    var graduacao = parseInt(document.getElementById("graduacaoAdestrar").value) || 0;
-    var modificadorCarisma = parseInt(document.getElementsByClassName("modificadorCarisma")[0].value) || 0;
-    var adestrarExtra = parseInt(document.getElementById("adestrarExtra").value) || 0;
-
-    var soma = graduacao + modificadorCarisma + adestrarExtra;
-
-    document.getElementById("adestrarTotal").value = soma;
-}
-
-function treinoAtletismo() {
-    var treinada = document.getElementById("atletismoTreinada").checked;
-
-    if (treinada) {
-        var nivel = parseInt(document.getElementById("nivelPersonagem").value) || 0;
-
-        var periciaGraduada = nivel + 3;
-
-        document.getElementById("graduacaoAtletismo").value = periciaGraduada;
-    } else {
-        var nivel = parseInt(document.getElementsByClassName("bonusNivel")[0].value);
-
-        document.getElementById("graduacaoAtletismo").value = nivel;
-    }
-}
-
-function calcularAtletismo() {
-    var graduacao = parseInt(document.getElementById("graduacaoAtletismo").value) || 0;
-    var modificadorForca = parseInt(document.getElementsByClassName("modificadorForca")[0].value) || 0;
-    var atletismoExtra = parseInt(document.getElementById("atletismoExtra").value) || 0;
-
-    var soma = graduacao + modificadorForca + atletismoExtra;
-
-    document.getElementById("atletismoTotal").value = soma;
-}
-
-function treinoAtuacao1() {
-    var treinada = document.getElementById("atuacao1Treinada").checked;
-
-    if (treinada) {
-        var nivel = parseInt(document.getElementById("nivelPersonagem").value) || 0;
-
-        var periciaGraduada = nivel + 3;
-
-        document.getElementById("graduacaoAtuacao1").value = periciaGraduada;
-    } else {
-        var nivel = parseInt(document.getElementsByClassName("bonusNivel")[0].value);
-
-        document.getElementById("graduacaoAtuacao1").value = nivel;
-    }
-}
-
-function calcularAtuacao1() {
-    var graduacao = parseInt(document.getElementById("graduacaoAtuacao1").value) || 0;
-    var modificadorCarisma = parseInt(document.getElementsByClassName("modificadorCarisma")[0].value) || 0;
-    var atuacao1Extra = parseInt(document.getElementById("atuacao1Extra").value) || 0;
-
-    var soma = graduacao + modificadorCarisma + atuacao1Extra;
-
-    document.getElementById("atuacao1Total").value = soma;
-}
-
-function treinoAtuacao2() {
-    var treinada = document.getElementById("atuacao2Treinada").checked;
-
-    if (treinada) {
-        var nivel = parseInt(document.getElementById("nivelPersonagem").value) || 0;
-
-        var periciaGraduada = nivel + 3;
-
-        document.getElementById("graduacaoAtuacao2").value = periciaGraduada;
-    } else {
-        var nivel = parseInt(document.getElementsByClassName("bonusNivel")[0].value);
-
-        document.getElementById("graduacaoAtuacao2").value = nivel;
-    }
-}
-
-function calcularAtuacao2() {
-    var graduacao = parseInt(document.getElementById("graduacaoAtuacao2").value) || 0;
-    var modificadorCarisma = parseInt(document.getElementsByClassName("modificadorCarisma")[0].value) || 0;
-    var atuacao2Extra = parseInt(document.getElementById("atuacao2Extra").value) || 0;
-
-    var soma = graduacao + modificadorCarisma + atuacao2Extra;
-
-    document.getElementById("atuacao2Total").value = soma;
-}
-
-function treinoCavalgar() {
-    var treinada = document.getElementById("cavalgarTreinada").checked;
-
-    if (treinada) {
-        var nivel = parseInt(document.getElementById("nivelPersonagem").value) || 0;
-
-        var periciaGraduada = nivel + 3;
-
-        document.getElementById("graduacaoCavalgar").value = periciaGraduada;
-    } else {
-        var nivel = parseInt(document.getElementsByClassName("bonusNivel")[0].value);
-
-        document.getElementById("graduacaoCavalgar").value = nivel;
-    }
-}
-
-function calcularCavalgar() {
-    var graduacao = parseInt(document.getElementById("graduacaoCavalgar").value) || 0;
-    var modificadorDestreza = parseInt(document.getElementsByClassName("modificadorDestreza")[0].value) || 0;
-    var cavalgarExtra = parseInt(document.getElementById("cavalgarExtra").value) || 0;
-
-    var soma = graduacao + modificadorDestreza + cavalgarExtra;
-
-    document.getElementById("cavalgarTotal").value = soma;
-}
-
-function treinoConhecimento1() {
-    var treinada = document.getElementById("conhecimento1Treinada").checked;
-
-    if (treinada) {
-        var nivel = parseInt(document.getElementById("nivelPersonagem").value) || 0;
-
-        var periciaGraduada = nivel + 3;
-
-        document.getElementById("graduacaoConhecimento1").value = periciaGraduada;
-    } else {
-        var nivel = parseInt(document.getElementsByClassName("bonusNivel")[0].value);
-
-        document.getElementById("graduacaoConhecimento1").value = nivel;
-    }
-}
-
-function calcularConhecimento1() {
-    var graduacao = parseInt(document.getElementById("graduacaoConhecimento1").value) || 0;
-    var modificadorInteligencia = parseInt(document.getElementsByClassName("modificadorInteligencia")[0].value) || 0;
-    var conhecimento1Extra = parseInt(document.getElementById("conhecimento1Extra").value) || 0;
-
-    var soma = graduacao + modificadorInteligencia + conhecimento1Extra;
-
-    document.getElementById("conhecimento1Total").value = soma;
-}
-
-function treinoConhecimento2() {
-    var treinada = document.getElementById("conhecimento2Treinada").checked;
-
-    if (treinada) {
-        var nivel = parseInt(document.getElementById("nivelPersonagem").value) || 0;
-
-        var periciaGraduada = nivel + 3;
-
-        document.getElementById("graduacaoConhecimento2").value = periciaGraduada;
-    } else {
-        var nivel = parseInt(document.getElementsByClassName("bonusNivel")[0].value);
-
-        document.getElementById("graduacaoConhecimento2").value = nivel;
-    }
-}
-
-function calcularConhecimento2() {
-    var graduacao = parseInt(document.getElementById("graduacaoConhecimento2").value) || 0;
-    var modificadorInteligencia = parseInt(document.getElementsByClassName("modificadorInteligencia")[0].value) || 0;
-    var conhecimento2Extra = parseInt(document.getElementById("conhecimento2Extra").value) || 0;
-
-    var soma = graduacao + modificadorInteligencia + conhecimento2Extra;
-
-    document.getElementById("conhecimento2Total").value = soma;
-}
-
-function treinoCura() {
-    var treinada = document.getElementById("curaTreinada").checked;
-
-    if (treinada) {
-        var nivel = parseInt(document.getElementById("nivelPersonagem").value) || 0;
-
-        var periciaGraduada = nivel + 3;
-
-        document.getElementById("graduacaoCura").value = periciaGraduada;
-    } else {
-        var nivel = parseInt(document.getElementsByClassName("bonusNivel")[0].value);
-
-        document.getElementById("graduacaoCura").value = nivel;
-    }
-}
-
-function calcularCura() {
-    var graduacao = parseInt(document.getElementById("graduacaoCura").value) || 0;
-    var modificadorSabedoria = parseInt(document.getElementsByClassName("modificadorSabedoria")[0].value) || 0;
-    var curaExtra = parseInt(document.getElementById("curaExtra").value) || 0;
-
-    var soma = graduacao + modificadorSabedoria + curaExtra;
-
-    document.getElementById("curaTotal").value = soma;
-}
-
-function treinoDiplomacia() {
-    var treinada = document.getElementById("diplomaciaTreinada").checked;
-
-    if (treinada) {
-        var nivel = parseInt(document.getElementById("nivelPersonagem").value) || 0;
-
-        var periciaGraduada = nivel + 3;
-
-        document.getElementById("graduacaoDiplomacia").value = periciaGraduada;
-    } else {
-        var nivel = parseInt(document.getElementsByClassName("bonusNivel")[0].value);
-
-        document.getElementById("graduacaoDiplomacia").value = nivel;
-    }
-}
-
-function calcularDiplomacia() {
-    var graduacao = parseInt(document.getElementById("graduacaoDiplomacia").value) || 0;
-    var modificadorSabedoria = parseInt(document.getElementsByClassName("modificadorSabedoria")[0].value) || 0;
-    var diplomaciaExtra = parseInt(document.getElementById("diplomaciaExtra").value) || 0;
-
-    var soma = graduacao + modificadorSabedoria + diplomaciaExtra;
-
-    document.getElementById("diplomaciaTotal").value = soma;
-}
-
-function treinoEnganacao() {
-    var treinada = document.getElementById("enganacaoTreinada").checked;
-
-    if (treinada) {
-        var nivel = parseInt(document.getElementById("nivelPersonagem").value) || 0;
-
-        var periciaGraduada = nivel + 3;
-
-        document.getElementById("graduacaoEnganacao").value = periciaGraduada;
-    } else {
-        var nivel = parseInt(document.getElementsByClassName("bonusNivel")[0].value);
-
-        document.getElementById("graduacaoEnganacao").value = nivel;
-    }
-}
-
-function calcularEnganacao() {
-    var graduacao = parseInt(document.getElementById("graduacaoEnganacao").value) || 0;
-    var modificadorCarisma = parseInt(document.getElementsByClassName("modificadorCarisma")[0].value) || 0;
-    var enganacaoExtra = parseInt(document.getElementById("enganacaoExtra").value) || 0;
-
-    var soma = graduacao + modificadorCarisma + enganacaoExtra;
-
-    document.getElementById("enganacaoTotal").value = soma;
-}
-
-function treinoFurtividade() {
-    var treinada = document.getElementById("furtividadeTreinada").checked;
-
-    if (treinada) {
-        var nivel = parseInt(document.getElementById("nivelPersonagem").value) || 0;
-
-        var periciaGraduada = nivel + 3;
-
-        document.getElementById("graduacaoFurtividade").value = periciaGraduada;
-    } else {
-        var nivel = parseInt(document.getElementsByClassName("bonusNivel")[0].value);
-
-        document.getElementById("graduacaoFurtividade").value = nivel;
-    }
-}
-
-function calcularFurtividade() {
-    var graduacao = parseInt(document.getElementById("graduacaoFurtividade").value) || 0;
-    var modificadorDestreza = parseInt(document.getElementsByClassName("modificadorDestreza")[0].value) || 0;
-    var furtividadeExtra = parseInt(document.getElementById("furtividadeExtra").value) || 0;
-
-    var soma = graduacao + modificadorDestreza + furtividadeExtra;
-
-    document.getElementById("furtividadeTotal").value = soma;
-}
-
-function treinoIdentMagia() {
-    var treinada = document.getElementById("identMagiaTreinada").checked;
-
-    if (treinada) {
-        var nivel = parseInt(document.getElementById("nivelPersonagem").value) || 0;
-
-        var periciaGraduada = nivel + 3;
-
-        document.getElementById("graduacaoIdentMagia").value = periciaGraduada;
-    } else {
-        var nivel = parseInt(document.getElementsByClassName("bonusNivel")[0].value);
-
-        document.getElementById("graduacaoIdentMagia").value = nivel;
-    }
-}
-
-function calcularIdentMagia() {
-    var graduacao = parseInt(document.getElementById("graduacaoIdentMagia").value) || 0;
-    var modificadorInteligencia = parseInt(document.getElementsByClassName("modificadorInteligencia")[0].value) || 0;
-    var identMagiaExtra = parseInt(document.getElementById("identMagiaExtra").value) || 0;
-
-    var soma = graduacao + modificadorInteligencia + identMagiaExtra;
-
-    document.getElementById("identMagiaTotal").value = soma;
-}
-
-function treinoIniciativa() {
-    var treinada = document.getElementById("iniciativaTreinada").checked;
-
-    if (treinada) {
-        var nivel = parseInt(document.getElementById("nivelPersonagem").value) || 0;
-
-        var periciaGraduada = nivel + 3;
-
-        document.getElementById("graduacaoIniciativa").value = periciaGraduada;
-    } else {
-        var nivel = parseInt(document.getElementsByClassName("bonusNivel")[0].value);
-
-        document.getElementById("graduacaoIniciativa").value = nivel;
-    }
-}
-
-function calcularIniciativa() {
-    var graduacao = parseInt(document.getElementById("graduacaoIniciativa").value) || 0;
-    var modificadorDestreza = parseInt(document.getElementsByClassName("modificadorDestreza")[0].value) || 0;
-    var iniciativaExtra = parseInt(document.getElementById("iniciativaExtra").value) || 0;
-
-    var soma = graduacao + modificadorDestreza + iniciativaExtra;
-
-    document.getElementById("iniciativaTotal").value = soma;
-}
-
-function treinoIntimidacao() {
-    var treinada = document.getElementById("intimidacaoTreinada").checked;
-
-    if (treinada) {
-        var nivel = parseInt(document.getElementById("nivelPersonagem").value) || 0;
-
-        var periciaGraduada = nivel + 3;
-
-        document.getElementById("graduacaoIntimidacao").value = periciaGraduada;
-    } else {
-        var nivel = parseInt(document.getElementsByClassName("bonusNivel")[0].value);
-
-        document.getElementById("graduacaoIntimidacao").value = nivel;
-    }
-}
-
-function calcularIntimidacao() {
-    var graduacao = parseInt(document.getElementById("graduacaoIntimidacao").value) || 0;
-    var modificadorCarisma = parseInt(document.getElementsByClassName("modificadorCarisma")[0].value) || 0;
-    var intimidacaoExtra = parseInt(document.getElementById("intimidacaoExtra").value) || 0;
-
-    var soma = graduacao + modificadorCarisma + intimidacaoExtra;
-
-    document.getElementById("intimidacaoTotal").value = soma;
-}
-
-function treinoIntuicao() {
-    var treinada = document.getElementById("intuicaoTreinada").checked;
-
-    if (treinada) {
-        var nivel = parseInt(document.getElementById("nivelPersonagem").value) || 0;
-
-        var periciaGraduada = nivel + 3;
-
-        document.getElementById("graduacaoIntuicao").value = periciaGraduada;
-    } else {
-        var nivel = parseInt(document.getElementsByClassName("bonusNivel")[0].value);
-
-        document.getElementById("graduacaoIntuicao").value = nivel;
-    }
-}
-
-function calcularIntuicao() {
-    var graduacao = parseInt(document.getElementById("graduacaoIntuicao").value) || 0;
-    var modificadorSabedoria = parseInt(document.getElementsByClassName("modificadorSabedoria")[0].value) || 0;
-    var intuicaoExtra = parseInt(document.getElementById("intuicaoExtra").value) || 0;
-
-    var soma = graduacao + modificadorSabedoria + intuicaoExtra;
-
-    document.getElementById("intuicaoTotal").value = soma;
-}
-
-function treinoLadinagem() {
-    var treinada = document.getElementById("ladinagemTreinada").checked;
-
-    if (treinada) {
-        var nivel = parseInt(document.getElementById("nivelPersonagem").value) || 0;
-
-        var periciaGraduada = nivel + 3;
-
-        document.getElementById("graduacaoLadinagem").value = periciaGraduada;
-    } else {
-        var nivel = parseInt(document.getElementsByClassName("bonusNivel")[0].value);
-
-        document.getElementById("graduacaoLadinagem").value = nivel;
-    }
-}
-
-function calcularLadinagem() {
-    var graduacao = parseInt(document.getElementById("graduacaoLadinagem").value) || 0;
-    var modificadorDestreza = parseInt(document.getElementsByClassName("modificadorDestreza")[0].value) || 0;
-    var ladinagemExtra = parseInt(document.getElementById("ladinagemExtra").value) || 0;
-
-    var soma = graduacao + modificadorDestreza + ladinagemExtra;
-
-    document.getElementById("ladinagemTotal").value = soma;
-}
-
-function treinoObterInfo() {
-    var treinada = document.getElementById("obterInfoTreinada").checked;
-
-    if (treinada) {
-        var nivel = parseInt(document.getElementById("nivelPersonagem").value) || 0;
-
-        var periciaGraduada = nivel + 3;
-
-        document.getElementById("graduacaoObterInfo").value = periciaGraduada;
-    } else {
-        var nivel = parseInt(document.getElementsByClassName("bonusNivel")[0].value);
-
-        document.getElementById("graduacaoObterInfo").value = nivel;
-    }
-}
-
-function calcularObterInfo() {
-    var graduacao = parseInt(document.getElementById("graduacaoObterInfo").value) || 0;
-    var modificadorCarisma = parseInt(document.getElementsByClassName("modificadorCarisma")[0].value) || 0;
-    var obterInfoExtra = parseInt(document.getElementById("obterInfoExtra").value) || 0;
-
-    var soma = graduacao + modificadorCarisma + obterInfoExtra;
-
-    document.getElementById("obterInfoTotal").value = soma;
-}
-
-function treinoOficio1() {
-    var treinada = document.getElementById("oficio1Treinada").checked;
-
-    if (treinada) {
-        var nivel = parseInt(document.getElementById("nivelPersonagem").value) || 0;
-
-        var periciaGraduada = nivel + 3;
-
-        document.getElementById("graduacaoOficio1").value = periciaGraduada;
-    } else {
-        var nivel = parseInt(document.getElementsByClassName("bonusNivel")[0].value);
-
-        document.getElementById("graduacaoOficio1").value = nivel;
-    }
-}
-
-function calcularOficio1() {
-    var graduacao = parseInt(document.getElementById("graduacaoOficio1").value) || 0;
-    var modificadorInteligencia = parseInt(document.getElementsByClassName("modificadorInteligencia")[0].value) || 0;
-    var oficio1Extra = parseInt(document.getElementById("oficio1Extra").value) || 0;
-
-    var soma = graduacao + modificadorInteligencia + oficio1Extra;
-
-    document.getElementById("oficio1Total").value = soma;
-}
-
-function treinoOficio2() {
-    var treinada = document.getElementById("oficio2Treinada").checked;
-
-    if (treinada) {
-        var nivel = parseInt(document.getElementById("nivelPersonagem").value) || 0;
-
-        var periciaGraduada = nivel + 3;
-
-        document.getElementById("graduacaoOficio2").value = periciaGraduada;
-    } else {
-        var nivel = parseInt(document.getElementsByClassName("bonusNivel")[0].value);
-
-        document.getElementById("graduacaoOficio2").value = nivel;
-    }
-}
-
-function calcularOficio2() {
-    var graduacao = parseInt(document.getElementById("graduacaoOficio2").value) || 0;
-    var modificadorInteligencia = parseInt(document.getElementsByClassName("modificadorInteligencia")[0].value) || 0;
-    var oficio2Extra = parseInt(document.getElementById("oficio2Extra").value) || 0;
-
-    var soma = graduacao + modificadorInteligencia + oficio2Extra;
-
-    document.getElementById("oficio2Total").value = soma;
-}
-
-function treinoPercepcao() {
-    var treinada = document.getElementById("percepcaoTreinada").checked;
-
-    if (treinada) {
-        var nivel = parseInt(document.getElementById("nivelPersonagem").value) || 0;
-
-        var periciaGraduada = nivel + 3;
-
-        document.getElementById("graduacaoPercepcao").value = periciaGraduada;
-    } else {
-        var nivel = parseInt(document.getElementsByClassName("bonusNivel")[0].value);
-
-        document.getElementById("graduacaoPercepcao").value = nivel;
-    }
-}
-
-function calcularPercepcao() {
-    var graduacao = parseInt(document.getElementById("graduacaoPercepcao").value) || 0;
-    var modificadorSabedoria = parseInt(document.getElementsByClassName("modificadorSabedoria")[0].value) || 0;
-    var percepcaoExtra = parseInt(document.getElementById("percepcaoExtra").value) || 0;
-
-    var soma = graduacao + modificadorSabedoria + percepcaoExtra;
-
-    document.getElementById("percepcaoTotal").value = soma;
-}
-
-function treinoSobrevivencia() {
-    var treinada = document.getElementById("sobrevivenciaTreinada").checked;
-
-    if (treinada) {
-        var nivel = parseInt(document.getElementById("nivelPersonagem").value) || 0;
-
-        var periciaGraduada = nivel + 3;
-
-        document.getElementById("graduacaoSobrevivencia").value = periciaGraduada;
-    } else {
-        var nivel = parseInt(document.getElementsByClassName("bonusNivel")[0].value);
-
-        document.getElementById("graduacaoSobrevivencia").value = nivel;
-    }
-}
-
-function calcularSobrevivencia() {
-    var graduacao = parseInt(document.getElementById("graduacaoSobrevivencia").value) || 0;
-    var modificadorSabedoria = parseInt(document.getElementsByClassName("modificadorSabedoria")[0].value) || 0;
-    var sobrevivenciaExtra = parseInt(document.getElementById("sobrevivenciaExtra").value) || 0;
-
-    var soma = graduacao + modificadorSabedoria + sobrevivenciaExtra;
-
-    document.getElementById("sobrevivenciaTotal").value = soma;
+function capitalize(texto){
+    return texto.charAt(0).toUpperCase() + texto.slice(1);
 }
 
 function treinoPericiaExtra1() {
