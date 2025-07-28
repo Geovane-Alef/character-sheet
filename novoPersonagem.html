@@ -142,87 +142,88 @@
                 <div class="container" id="infoFisico">
                     <div class="width_20 tabletTo42">
                         <div class="container habilidades">
-                            <div class="width_29">
-                                <h5>Habilidades</h5>
+                            <div class="width_33">
+                                <h5>Habilidade</h5>
                             </div>
-                            <div class="width_21">
+                            <div class="width_33">
                                 <h5>Valor</h5>
                             </div>
-                            <div class="width_50">
-                                <h5>Modificador de Hab.</h5>
+                            <div class="width_33">
+                                <h5>Modificador</h5>
                             </div>
                         </div>
 
                         <div id="" class="container habilidades">
-                            <div class="width_29">
+                            <div class="width_33">
                                 <label for="valorForca">Força</label>
                             </div>
-                            <div class="width_21">
-                                <input id="valorForca" oninput="converterForca()" type="text" name="valorForca" placeholder="10">
+                            <div class="width_33">
+                                <input id="valorForca" oninput="calcularModificador('forca')" type="text" name="valorForca" placeholder="10">
+                                <label onclick="rolarDadoForca()">Role</label>
                             </div>
-                            <div class="width_50">
+                            <div class="width_33">
                                 <input class="modificadorForca" type="text" name="modificadorForca" placeholder="0">
                             </div>
                         </div>
 
                         <div id="" class="container habilidades">
-                            <div class="width_29">
+                            <div class="width_33">
                                 <label for="valorDestreza">Destreza</label>
                             </div>
-                            <div class="width_21">
-                                <input id="valorDestreza" oninput="converterDestreza()" type="text" name="valorDestreza" placeholder="10">
+                            <div class="width_33">
+                                <input id="valorDestreza" oninput="calcularModificador('destreza')" type="text" name="valorDestreza" placeholder="10">
                             </div>
-                            <div class="width_50">
+                            <div class="width_33">
                                 <input class="modificadorDestreza" type="text" name="modificadorDestreza" placeholder="0">
                             </div>
                         </div>
 
                         <div id="" class="container habilidades">
-                            <div class="width_29">
+                            <div class="width_33">
                                 <label for="valorConstituicao">Constituição</label>
                             </div>
-                            <div class="width_21">
-                                <input id="valorConstituicao" oninput="converterConstituicao()" type="text" name="valorConstituicao" placeholder="10">
+                            <div class="width_33">
+                                <input id="valorConstituicao" oninput="calcularModificador('constituicao')" type="text" name="valorConstituicao" placeholder="10">
                             </div>
-                            <div class="width_50">
+                            <div class="width_33">
                                 <input class="modificadorConstituicao" type="text" name="modificadorConstituicao" placeholder="0">
                             </div>
                         </div>
 
                         <div id="" class="container habilidades">
-                            <div class="width_29">
+                            <div class="width_33">
                                 <label for="valorInteligencia">Inteligência</label>
                             </div>
-                            <div class="width_21">
-                                <input id="valorInteligencia" oninput="converterInteligencia()" type="text" name="valorInteligencia" placeholder="10">
+                            <div class="width_33">
+                                <input id="valorInteligencia" oninput="calcularModificador('inteligencia')" type="text" name="valorInteligencia" placeholder="10">
                             </div>
-                            <div class="width_50">
+                            <div class="width_33">
                                 <input class="modificadorInteligencia" type="text" name="modificadorInteligencia" placeholder="0">
                             </div>
                         </div>
 
                         <div id="" class="container habilidades">
-                            <div class="width_29">
+                            <div class="width_33">
                                 <label for="valorSabedoria">Sabedoria</label>
                             </div>
-                            <div class="width_21">
-                                <input id="valorSabedoria" oninput="converterSabedoria()" type="text" name="valorSabedoria" placeholder="10">
+                            <div class="width_33">
+                                <input id="valorSabedoria" oninput="calcularModificador('sabedoria')" type="text" name="valorSabedoria" placeholder="10">
                             </div>
-                            <div class="width_50">
+                            <div class="width_33">
                                 <input class="modificadorSabedoria" type="text" name="modificadorSabedoria" placeholder="0">
                             </div>
                         </div>
 
                         <div id="" class="container habilidades">
-                            <div class="width_29">
+                            <div class="width_33">
                                 <label for="valorCarisma">Carisma</label>
                             </div>
 
-                            <div class="width_21">
-                                <input id="valorCarisma" oninput="converterCarisma()" type="text" name="valorCarisma" placeholder="10">
+                            <div class="width_33">
+                                <input id="valorCarisma" oninput="calcularModificador('carisma')" type="text" name="valorCarisma" placeholder="10">
                             </div>
 
-                            <div class="width_50">
+                            <div class="width_33">
                                 <input class="modificadorCarisma" type="text" name="modificadorCarisma" placeholder="0">
                             </div>
                         </div>
@@ -327,15 +328,15 @@
                                 <label for="totalFortitude">Fortitude</label>
                             </div>
                             <div class="width_10">
-                                <input id="totalFortitude" onclick="calcularFortitude()" type="text" name="totalFortitude" readonly>
+                                <input id="totalFortitude" onclick="calcularResistencia('constituicao','fortitude')" type="text" name="totalFortitude" readonly>
                             </div>
                             <div class="width_60">
                                 <span>=</span>
-                                <input class="bonusNivel" onclick="calcularFortitude()" type="text"placeholder="1/2 nível" readonly>
+                                <input class="bonusNivel" onclick="calcularResistencia('constituicao','fortitude')" type="text"placeholder="1/2 nível" readonly>
                                 <span>+</span>
-                                <input class="modificadorConstituicao" onclick="calcularFortitude()" type="text"placeholder="Habilid." readonly>
+                                <input class="modificadorConstituicao" onclick="calcularResistencia('constituicao','fortitude')" type="text"placeholder="Habilid." readonly>
                                 <span>+</span>
-                                <input id="fortitudeExtra" oninput="calcularFortitude()" name="fortitudeExtra" type="text" placeholder="Outros">
+                                <input id="fortitudeExtra" oninput="calcularResistencia('constituicao','fortitude')" name="fortitudeExtra" type="text" placeholder="Outros">
                             </div> 
                         </div>
                         <div class="container">
@@ -343,15 +344,15 @@
                                 <label for="totalReflexo">Reflexo</label>
                             </div>
                             <div class="width_10">
-                                <input id="totalReflexo" onclick="calcularReflexo()" type="text" name="totalReflexo" readonly>
+                                <input id="totalReflexo" onclick="calcularResistencia('destreza','reflexo')" type="text" name="totalReflexo" readonly>
                             </div>
                             <div class="width_60">
                                 <span>=</span>
-                                <input class="bonusNivel" onclick="calcularReflexo()" type="text"placeholder="1/2 nível" readonly>
+                                <input class="bonusNivel" onclick="calcularResistencia('destreza','reflexo')" type="text"placeholder="1/2 nível" readonly>
                                 <span>+</span>
-                                <input class="modificadorDestreza" onclick="calcularReflexo()" type="text"placeholder="Habilid." readonly>
+                                <input class="modificadorDestreza" onclick="calcularResistencia('destreza','reflexo')" type="text"placeholder="Habilid." readonly>
                                 <span>+</span>
-                                <input id="reflexoExtra" oninput="calcularReflexo()" name="reflexoExtra" type="text" placeholder="Outros">
+                                <input id="reflexoExtra" oninput="calcularResistencia('destreza','reflexo')" name="reflexoExtra" type="text" placeholder="Outros">
                             </div> 
                         </div>
                         <div class="container">
@@ -359,15 +360,15 @@
                                 <label for="totalVontade">Vontade</label>
                             </div>
                             <div class="width_10">
-                                <input id="totalVontade" onclick="calcularVontade()" type="text" name="totalVontade" readonly>
+                                <input id="totalVontade" onclick="calcularResistencia('sabedoria','vontade')" type="text" name="totalVontade" readonly>
                             </div>
                             <div class="width_60">
                                 <span>=</span>
-                                <input class="bonusNivel" onclick="calcularVontade()" type="text"placeholder="1/2 nível" readonly>
+                                <input class="bonusNivel" onclick="calcularResistencia('sabedoria','vontade')" type="text"placeholder="1/2 nível" readonly>
                                 <span>+</span>
-                                <input class="modificadorSabedoria" onclick="calcularVontade()" type="text"placeholder="Habilid." readonly>
+                                <input class="modificadorSabedoria" onclick="calcularResistencia('sabedoria','vontade')" type="text"placeholder="Habilid." readonly>
                                 <span>+</span>
-                                <input id="vontadeExtra" oninput="calcularVontade()" name="vontadeExtra" type="text" placeholder="Outros">
+                                <input id="vontadeExtra" oninput="calcularResistencia('sabedoria','vontade')" name="vontadeExtra" type="text" placeholder="Outros">
                             </div> 
                         </div>
                         <div class="container">
@@ -885,37 +886,37 @@
 
                         <div id="periciaExtra1" class="container">
                             <div class="width_50">
-                                <input id="periciaExtra1Treinada" onclick="calcularPericia('periciaExtra1','periciaExtra1')" type="checkbox" name="">
+                                <input id="periciaExtra1Treinada" onclick="calcularPericiaExtra('periciaExtra1')" type="checkbox" name="">
                                 <label for="periciaExtra1Treinada"><input type="text" size="15"></label>
                             </div>
                             <div class="width_10">
-                                <input id="periciaExtra1Total" class="caixaInfoPericias" onclick="calcularPericia('periciaExtra1','periciaExtra1')" type="text" name="" readonly>
+                                <input id="periciaExtra1Total" class="caixaInfoPericias" onclick="calcularPericiaExtra('periciaExtra1')" type="text" name="" readonly>
                             </div>
                             <div class="width_40">
                                 <span>=</span>
                                 <input id="graduacaoPericiaExtra1" class="bonusNivel caixaInfoPericias" type="text" placeholder="Grad." readonly>
                                 <span>+</span>
-                                <input id="modificadorPericiaExtra1" class="caixaInfoPericias" type="text" placeholder="Hab.">
+                                <input id="modificadorPericiaExtra1" class="caixaInfoPericias" oninput="calcularPericiaExtra('periciaExtra1')" type="text" placeholder="Hab.">
                                 <span>+</span>
-                                <input id="periciaExtra1Extra" class="caixaInfoPericias" oninput="calcularPericia('periciaExtra1','periciaExtra1')" type="text" placeholder="Outros">
+                                <input id="periciaExtra1Extra" class="caixaInfoPericias" oninput="calcularPericiaExtra('periciaExtra1')" type="text" placeholder="Outros">
                             </div>
                         </div>
 
                         <div id="periciaExtra2" class="container">
                             <div class="width_50">
-                                <input id="periciaExtra2Treinada" onclick="calcularPericia('periciaExtra2','periciaExtra2')" type="checkbox" name="">
+                                <input id="periciaExtra2Treinada" onclick="calcularPericiaExtra('periciaExtra2')" type="checkbox" name="">
                                 <label for="periciaExtra2Treinada"><input type="text" size="15"></label>
                             </div>
                             <div class="width_10">
-                                <input id="periciaExtra2Total" class="caixaInfoPericias" onclick="calcularPericia('periciaExtra2','periciaExtra2')" type="text" name="" readonly>
+                                <input id="periciaExtra2Total" class="caixaInfoPericias" onclick="calcularPericiaExtra('periciaExtra2')" type="text" name="" readonly>
                             </div>
                             <div class="width_40">
                                 <span>=</span>
                             <input id="graduacaoPericiaExtra2" class="bonusNivel caixaInfoPericias" type="text" placeholder="Grad." readonly>
                             <span>+</span>
-                            <input id="modificadorPericiaExtra2" class="caixaInfoPericias" type="text" placeholder="Hab.">
+                            <input id="modificadorPericiaExtra2" oninput="calcularPericiaExtra('periciaExtra2')" class="caixaInfoPericias" type="text" placeholder="Hab.">
                             <span>+</span>
-                            <input id="periciaExtra2Extra" class="caixaInfoPericias" oninput="calcularPericia('periciaExtra2','periciaExtra2')" type="text" placeholder="Outros">
+                            <input id="periciaExtra2Extra" class="caixaInfoPericias" oninput="calcularPericiaExtra('periciaExtra2')" type="text" placeholder="Outros">
                             </div>
                         </div>
                     </div>
@@ -940,17 +941,17 @@
                                 <label for="">Fisico</label>
                             </div>
                             <div class="width_10">
-                                <input id="totalAtaqueCorpo" onclick="calcularAtaqueCorpo()" type="text" name="totalAtaqueCorpo" readonly>
+                                <input id="totalAtaqueCorpo" onclick="calcularAtaque('forca', 'corpo')" type="text" name="totalAtaqueCorpo" readonly>
                             </div>
                             <div class="width_72">
                                 <span> = </span>
-                                <input class="bbaAtual" onclick="calcularAtaqueCorpo()" type="text" name="" placeholder="BBA" readonly>
+                                <input class="bbaAtual" onclick="calcularAtaque('forca', 'corpo')" type="text" name="" placeholder="BBA" readonly>
                                 <span> + </span>
-                                <input class="modificadorForca" onclick="calcularAtaqueCorpo()" type="text" name="" placeholder="Hab" readonly>
+                                <input class="modificadorForca" onclick="calcularAtaque('forca', 'corpo')" type="text" name="" placeholder="Hab" readonly>
                                 <span> + </span>
-                                <input id="modTamAtaqueCorpo" oninput="calcularAtaqueCorpo()" type="text" name="modTamAtaqueCorpo" placeholder="Tam">
+                                <input id="modTamAtaqueCorpo" oninput="calcularAtaque('forca', 'corpo')" type="text" name="modTamAtaqueCorpo" placeholder="Tam">
                                 <span> + </span>
-                                <input id="extraAtaqueCorpo" oninput="calcularAtaqueCorpo()" type="text" name="extraAtaqueCorpo" placeholder="Outros">
+                                <input id="extraAtaqueCorpo" oninput="calcularAtaque('forca', 'corpo')" type="text" name="extraAtaqueCorpo" placeholder="Outros">
                             </div>
                         </div>
                     </div>

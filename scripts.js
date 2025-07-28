@@ -63,7 +63,7 @@ function classeEscolhida() {
         checkbox.checked = false;
     });
     
-    const classeCheckboxes = document.querySelectorAll(`.${selecionaClasse}`);
+    const classeCheckboxes = document.querySelectorAll(`${selecionaClasse}`);
     classeCheckboxes.forEach(checkbox => {
         checkbox.disabled = false;
     });
@@ -130,85 +130,17 @@ function metadeNivel() {
     return metade;
 }
 
-function converterForca() {
-    var numero = parseInt(document.getElementById("valorForca").value);
-
-    //operador ternário
+function calcularModificador(habilidade) {
+    const numero = parseInt(document.getElementById(`valor${capitalize(habilidade)}`).value) || 0;
     var modificador = modificadores[numero] !== undefined ? modificadores[numero] : -6;
-
-    var camposResultado = document.querySelectorAll(".modificadorForca");
     
+    var camposResultado = document.querySelectorAll(`.modificador${capitalize(habilidade)}`);
+
     camposResultado.forEach(function(campo) {
         campo.value = modificador;
     })
 
-    calcularAtaqueCorpo();
-}
-
-function converterDestreza() {
-    var numero = parseInt(document.getElementById("valorDestreza").value);
-
-    var modificador = modificadores[numero] !== undefined ? modificadores[numero] : -6;
-
-    var camposResultado = document.querySelectorAll(".modificadorDestreza");
-    
-    camposResultado.forEach(function(campo) {
-        campo.value = modificador;
-    })
-
-    calcularReflexo(); calcularCA(); calcularAtaqueDistancia();
-}
-
-function converterConstituicao() {
-    var numero = parseInt(document.getElementById("valorConstituicao").value);
-
-    var modificador = modificadores[numero] !== undefined ? modificadores[numero] : -6;
-
-    var camposResultado = document.querySelectorAll(".modificadorConstituicao");
-    
-    camposResultado.forEach(function(campo) {
-        campo.value = modificador;
-    })
-
-    calcularFortitude();
-}
-
-function converterInteligencia() {
-    var numero = parseInt(document.getElementById("valorInteligencia").value);
-
-    var modificador = modificadores[numero] !== undefined ? modificadores[numero] : -6;
-
-    var camposResultado = document.querySelectorAll(".modificadorInteligencia");
-    
-    camposResultado.forEach(function(campo) {
-        campo.value = modificador;
-    })
-}
-
-function converterSabedoria() {
-    var numero = parseInt(document.getElementById("valorSabedoria").value);
-
-    var modificador = modificadores[numero] !== undefined ? modificadores[numero] : -6;
-
-    var camposResultado = document.querySelectorAll(".modificadorSabedoria");
-    
-    camposResultado.forEach(function(campo) {
-        campo.value = modificador;
-    })
-
-    calcularVontade();
-}
-
-function converterCarisma() {
-    var numero = parseInt(document.getElementById("valorCarisma").value);
-
-    var modificador = modificadores[numero] !== undefined ? modificadores[numero] : -6;
-
-    var camposResultado = document.querySelectorAll(".modificadorCarisma");
-    
-    camposResultado.forEach(function(campo) {
-        campo.value = modificador;
-    })
+    calcularAtaque('forca','corpo'); calcularAtaque('destreza','distancia'); calcularReflexo(); calcularCA(); calcularFortitude(); calcularVontade();
 }
 
 function calcularCA() {
@@ -226,116 +158,66 @@ function calcularCA() {
     document.getElementById("totalCA").value = caDefinida;
 }
 
-function calcularFortitude() {
+function calcularResistencia(habilidade, resistencia) {
     var bonusNivel = parseInt(document.getElementsByClassName("bonusNivel")[0].value) || 0; // || 0 = Se não for um número, trate como 0
-    var modificadorConstituicao = parseInt(document.getElementsByClassName("modificadorConstituicao")[0].value) || 0; // || 0 = Se não for um número, trate como 0
-    var fortitudeExtra = parseInt(document.getElementById("fortitudeExtra").value) || 0; // || 0 = Se não for um número, trate como 0
+    var modificadorHabilidade = parseInt(document.getElementsByClassName(`modificador${capitalize(habilidade)}`)[0].value) || 0;
+    var resistenciaExtra = parseInt(document.getElementById(`${resistencia}Extra`).value) || 0;
 
-    var calculoFortitude = bonusNivel + modificadorConstituicao + fortitudeExtra;
-    var fortitudeDefinida = calculoFortitude;
+    var calculoResistencia = bonusNivel + modificadorHabilidade + resistenciaExtra;
 
-    document.getElementById("totalFortitude").value = fortitudeDefinida;
-}
-
-function calcularReflexo() {
-    var bonusNivel = parseInt(document.getElementsByClassName("bonusNivel")[0].value) || 0;
-    var modificadorDestreza = parseInt(document.getElementsByClassName("modificadorDestreza")[0].value) || 0;
-    var reflexoExtra = parseInt(document.getElementById("reflexoExtra").value) || 0;
-
-    var calculoReflexo = bonusNivel + modificadorDestreza + reflexoExtra;
-    var reflexoDefinido = calculoReflexo;
-
-    document.getElementById("totalReflexo").value = reflexoDefinido;
-}
-
-function calcularVontade() {
-    var bonusNivel = parseInt(document.getElementsByClassName("bonusNivel")[0].value) || 0;
-    var modificadorSabedoria = parseInt(document.getElementsByClassName("modificadorSabedoria")[0].value) || 0;
-    var sabedoriaExtra = parseInt(document.getElementById("vontadeExtra").value) || 0;
-
-    var calculoVontade = bonusNivel + modificadorSabedoria + sabedoriaExtra;
-    var vontadeDefinida = calculoVontade;
-
-    document.getElementById("totalVontade").value = vontadeDefinida;
+    document.getElementById(`total${capitalize(resistencia)}`).value = calculoResistencia;
 }
 
 function calcularPericia(pericia, habilidade) {
     const nivel = parseInt(document.getElementById("nivelPersonagem").value) || 0;
-    console.log(nivel);
     const treinada = document.getElementById(`${pericia}Treinada`).checked;
-    console.log(treinada);
     const graduacao = treinada == true ? (nivel + 3) : Math.floor(nivel / 2);
     document.getElementById(`graduacao${capitalize(pericia)}`).value = graduacao;
-    console.log(graduacao);
     const modificadorElement = document.getElementsByClassName(`modificador${capitalize(habilidade)}`)[0];
-    console.log(modificadorElement);
     const modificador = modificadorElement ? parseInt(modificadorElement.value) || 0 : 0;
-    console.log(modificador);
 
     const outros = parseInt(document.getElementById(`${pericia}Extra`).value) || 0;
-    console.log(outros);
 
     const total = graduacao + modificador + outros;
     document.getElementById(`${pericia}Total`).value = total;
-    console.log(total);
 }
 
 function capitalize(texto){
     return texto.charAt(0).toUpperCase() + texto.slice(1);
 }
 
-function treinoPericiaExtra1() {
-    var treinada = document.getElementById("periciaExtra1Treinada").checked;
+function calcularPericiaExtra(pericia) {
+    const nivel = parseInt(document.getElementById("nivelPersonagem").value) || 0;
+    const treinada = document.getElementById(`${pericia}Treinada`).checked;
+    const graduacao = treinada == true ? (nivel + 3) : Math.floor(nivel / 2);
+    document.getElementById(`graduacao${capitalize(pericia)}`).value = graduacao;
+    const modificadorElement = document.getElementById(`modificador${capitalize(pericia)}`);
+    const modificador = modificadorElement ? parseInt(modificadorElement.value) || 0 : 0;
+    console.log(modificadorElement);
+    console.log(modificador);
 
-    if (treinada) {
-        var nivel = parseInt(document.getElementById("nivelPersonagem").value) || 0;
+    const outros = parseInt(document.getElementById(`${pericia}Extra`).value) || 0;
 
-        var periciaGraduada = nivel + 3;
-
-        document.getElementById("graduacaoPericiaExtra1").value = periciaGraduada;
-    } else {
-        var nivel = parseInt(document.getElementsByClassName("bonusNivel")[0].value);
-
-        document.getElementById("graduacaoPericiaExtra1").value = nivel;
-    }
+    const total = graduacao + modificador + outros;
+    document.getElementById(`${pericia}Total`).value = total;
 }
 
-function calcularPericiaExtra1() {
-    var graduacao = parseInt(document.getElementById("graduacaoPericiaExtra1").value) || 0;
-    var modificador = parseInt(document.getElementById("modificadorPericiaExtra1").value) || 0;
-    var periciaExtra1Extra = parseInt(document.getElementById("periciaExtra1Extra").value) || 0;
+function calcularAtaque(habilidade, ataque) {
+    var bba = parseInt(document.getElementsByClassName("bbaAtual")[0].value) || 0;
+    console.log(bba);
+    var modificador = parseInt(document.getElementsByClassName(`modificador${capitalize(habilidade)}`)[0].value) || 0;
+    console.log(modificador);
+    var tamanho = parseInt(document.getElementById(`modTamAtaque${capitalize(ataque)}`).value) || 0;
+    console.log(tamanho);
+    var extra = parseInt(document.getElementById(`extraAtaque${capitalize(ataque)}`).value) || 0;
+    console.log(extra);
 
-    var soma = graduacao + modificador + periciaExtra1Extra;
-
-    document.getElementById("periciaExtra1Total").value = soma;
+    var ataque = bba + modificador + tamanho + extra;
+    document.getElementById(`totalAtaque${capitalize(ataque)}`).value = ataque;
+    console.log(ataque);
 }
 
-function treinoPericiaExtra2() {
-    var treinada = document.getElementById("periciaExtra2Treinada").checked;
-
-    if (treinada) {
-        var nivel = parseInt(document.getElementById("nivelPersonagem").value) || 0;
-
-        var periciaGraduada = nivel + 3;
-
-        document.getElementById("graduacaoPericiaExtra2").value = periciaGraduada;
-    } else {
-        var nivel = parseInt(document.getElementsByClassName("bonusNivel")[0].value);
-
-        document.getElementById("graduacaoPericiaExtra2").value = nivel;
-    }
-}
-
-function calcularPericiaExtra2() {
-    var graduacao = parseInt(document.getElementById("graduacaoPericiaExtra2").value) || 0;
-    var modificador = parseInt(document.getElementById("modificadorPericiaExtra2").value) || 0;
-    var periciaExtra2Extra = parseInt(document.getElementById("periciaExtra2Extra").value) || 0;
-
-    var soma = graduacao + modificador + periciaExtra2Extra;
-
-    document.getElementById("periciaExtra2Total").value = soma;
-}
-
+/*
 function calcularAtaqueCorpo() {
     var bba = parseInt(document.getElementsByClassName("bbaAtual")[0].value) || 0;
     var modificador = parseInt(document.getElementsByClassName("modificadorForca")[0].value) || 0;
@@ -357,7 +239,7 @@ function calcularAtaqueDistancia() {
 
     document.getElementById("totalAtaqueDistancia").value = ataque;
 }
-
+*/
 
 function valorArmadura() {
     var armadura = parseInt(document.getElementById("bonusClasseArmadura").value) || 0;
@@ -433,6 +315,6 @@ function limiteDestreza() {
         }
 
         document.getElementById("valorDestreza").value = valorDestreza;
-        converterDestreza();
+        calcularModificador('destreza');
     }
 }
