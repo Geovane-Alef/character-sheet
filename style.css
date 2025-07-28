@@ -20,6 +20,11 @@ h5 {
     font-size: 14px;
 }
 
+h6 {
+    font-size: 12px;
+    margin: 0px 0px 10px 0px;
+}
+
 .container {
     display: flex;
     justify-content: space-between;
@@ -216,6 +221,23 @@ h5 {
 
 .hideDesktop {
     display: none;
+}
+
+.listaArmas {
+    width: 500px;
+    border: 1px solid #000;
+    border-radius: 10px;
+    padding: 10px;
+    position: relative;
+    left: 250px;
+    
+    z-index: 1;
+    background: #FFF;
+}
+
+.listaArmas p {
+    margin: 5px 0px;
+    font-size: 12px;
 }
 
 @media screen and (max-width: 1400px) {
