@@ -89,7 +89,7 @@ function classeEscolhida() {
         campo.value = bbaAtual;
     })
 
-    calcularAtaqueCorpo(); calcularAtaqueDistancia();
+    calcularAtaque('forca','corpo');
 }
 
 function bbaDiferente() {
@@ -124,7 +124,7 @@ function metadeNivel() {
         campo.value = metade;
     })
 
-    calcularCA();
+    calcularCA(); calcularAtaque('forca','corpo'); calcularAtaque('destreza','distancia');
 
     return metade;
 }
@@ -219,8 +219,8 @@ function calcularAtaque(habilidade, ataque) {
     var extra = parseInt(document.getElementById(`extraAtaque${capitalize(ataque)}`).value) || 0;
     console.log(extra);
 
-    var ataque = bba + modificador + tamanho + extra;
-    document.getElementById(`totalAtaque${capitalize(ataque)}`).value = ataque;
+    var total = bba + modificador + tamanho + extra;
+    document.getElementById(`totalAtaque${capitalize(ataque)}`).value = total;
     console.log(ataque);
 }
 
