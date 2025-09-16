@@ -31,7 +31,6 @@ function classeEscolhida() {
     }
     var classeSelecionada = vidaInicial[selecionaClasse];
     document.getElementById("vidaInicial").value = classeSelecionada;
-   
 
     var vidaPorNivel = {
         "BBR": 6, "BRD": 3,
@@ -63,7 +62,7 @@ function classeEscolhida() {
         checkbox.checked = false;
     });
     
-    const classeCheckboxes = document.querySelectorAll(`${selecionaClasse}`);
+    const classeCheckboxes = document.querySelectorAll(`.${selecionaClasse}`);
     classeCheckboxes.forEach(checkbox => {
         checkbox.disabled = false;
     });
@@ -73,10 +72,10 @@ function classeEscolhida() {
         "BRD": bbaDiferente(),
         "CLR": bbaDiferente(),
         "DRD": bbaDiferente(),
-        "FET": bonusNivel(),
+        "FET": metadeNivel(),
         "GUE": parseInt(document.getElementById("nivelPersonagem").value),
         "LAD": bbaDiferente(),
-        "MAG": bonusNivel(),
+        "MAG": metadeNivel(),
         "MNG": parseInt(document.getElementById("nivelPersonagem").value),
         "PAL": parseInt(document.getElementById("nivelPersonagem").value),
         "RGR": parseInt(document.getElementById("nivelPersonagem").value),
