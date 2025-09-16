@@ -129,6 +129,14 @@ function metadeNivel() {
     return metade;
 }
 
+function rolarDado(habilidade){
+    dadoSorteado = Math.floor(Math.random() * (20 - 1 + 1) + 1);
+    
+    document.getElementById(`valor${capitalize(habilidade)}`).value = dadoSorteado;
+
+    calcularModificador(habilidade);
+}
+
 function calcularModificador(habilidade) {
     const numero = parseInt(document.getElementById(`valor${capitalize(habilidade)}`).value) || 0;
     var modificador = modificadores[numero] !== undefined ? modificadores[numero] : -6;

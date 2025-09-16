@@ -116,6 +116,14 @@ h6 {
     align-items: center;
 }
 
+.habilidades img{
+    width: 30px;
+}
+
+.habilidades label{
+    display: flex;
+}
+
 #infoFisico div input {
     width: 30px;
     height: 30px;
