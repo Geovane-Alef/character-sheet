@@ -67,6 +67,10 @@ h6 {
     width: 33%;
 }
 
+.width_35 {
+    width: 35%;
+}
+
 .width_40 {
     width: 40%;
 }
@@ -213,12 +217,29 @@ h6 {
 }
 
 #equipaveisVestidos div input{
-    width: 50px;
+    width: 60px;
     text-align: center;
 }
 
+#equipaveisVestidos .espacoArmas {
+    display: flex;
+}
+
+#equipaveisVestidos .titulosEquipamentos h4 {
+    margin: 10px 0px;
+}
+
+#equipaveisVestidos .espacoArmas h5 {
+    margin: 0px 10px 0px 0px;
+
+}
+
+#equipaveisVestidos .container {
+    margin: 12px 0px;
+}
+
 .nomeArmas input {
-    width: 350px !important; 
+    width: 300px !important; 
     text-align: left !important;
 }
 

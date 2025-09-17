@@ -224,29 +224,38 @@ function calcularAtaque(habilidade, ataque) {
     console.log(ataque);
 }
 
-/*
-function calcularAtaqueCorpo() {
-    var bba = parseInt(document.getElementsByClassName("bbaAtual")[0].value) || 0;
-    var modificador = parseInt(document.getElementsByClassName("modificadorForca")[0].value) || 0;
-    var tamanho = parseInt(document.getElementById("modTamAtaqueCorpo").value) || 0;
-    var extra = parseInt(document.getElementById("extraAtaqueCorpo").value) || 0;
+// Preenche todos os selects de armas
+document.querySelectorAll(".selecionarArma").forEach(select => {
+  armasPadrao.forEach((arma, i) => {
+    const option = document.createElement("option");
+    option.value = i;
+    option.textContent = arma.nome;
+    select.appendChild(option);
+  });
 
-    var ataque = bba + modificador + tamanho + extra;
+  // Evento de seleção individual
+  select.addEventListener("change", () => {
+    const slot = select.dataset.slot; // Qual espaço (1, 2, 3...)
+    const selectedIndex = select.value;
 
-    document.getElementById("totalAtaqueCorpo").value = ataque;
-}
-
-function calcularAtaqueDistancia() {
-    var bba = parseInt(document.getElementsByClassName("bbaAtual")[0].value) || 0;
-    var modificador = parseInt(document.getElementsByClassName("modificadorDestreza")[0].value) || 0;
-    var tamanho = parseInt(document.getElementById("modTamAtaqueDistancia").value) || 0;
-    var extra = parseInt(document.getElementById("extraAtaqueDistancia").value) || 0;
-
-    var ataque = bba + modificador + tamanho + extra;
-
-    document.getElementById("totalAtaqueDistancia").value = ataque;
-}
-*/
+    if (selectedIndex !== "") {
+      const arma = armasPadrao[selectedIndex];
+      document.getElementById("nomeArma" + slot).value = arma.nome;
+      document.getElementById("danoArma" + slot).value = arma.dano;
+      document.getElementById("criticoArma" + slot).value = arma.critico;
+      document.getElementById("distanciaArma" + slot).value = arma.distancia;
+      document.getElementById("tipoArma" + slot).value = arma.tipo;
+    } else {
+      // Se voltar para manual, limpa os campos
+      document.getElementById("nomeArma" + slot).value = "";
+      document.getElementById("danoArma" + slot).value = "";
+      document.getElementById("criticoArma" + slot).value = "";
+      document.getElementById("distanciaArma" + slot).value = "";
+      document.getElementById("tipoArma" + slot).value = "";
+      
+    }
+  });
+});
 
 function valorArmadura() {
     var armadura = parseInt(document.getElementById("bonusClasseArmadura").value) || 0;
