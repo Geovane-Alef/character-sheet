@@ -224,20 +224,35 @@ function calcularAtaque(habilidade, ataque) {
     console.log(ataque);
 }
 
-// Preenche todos os selects de armas
-document.querySelectorAll(".selecionarArma").forEach(select => {
-  armasPadrao.forEach((arma, i) => {
-    const option = document.createElement("option");
-    option.value = i;
-    option.textContent = arma.nome;
-    select.appendChild(option);
-  });
+//Preenchimento a lista com as armas padrões
+function preencherSelecaoArmas(selectElement) {
+  for (const categoria in estrutura) {
+    const optgroupCategoria = document.createElement("optgroup");
+    optgroupCategoria.label = categoria;
 
-  // Evento de seleção individual
-  select.addEventListener("change", () => {
-    const slot = select.dataset.slot; // Qual espaço (1, 2, 3...)
-    const selectedIndex = select.value;
+    for (const grupo in estrutura[categoria]) {
+      const optionGrupo = document.createElement("option");
+      optionGrupo.textContent = `--- ${grupo} ---`;
+      optionGrupo.disabled = true; // Serve de título
+      optionGrupo.classList.add("optionTitulosDesativados");
+      optgroupCategoria.appendChild(optionGrupo);
 
+      estrutura[categoria][grupo].forEach(arma => {
+        const option = document.createElement("option");
+        option.value = arma.index;
+        option.textContent = arma.nome;
+        optgroupCategoria.appendChild(option);
+      });
+    }
+
+    selectElement.appendChild(optgroupCategoria);
+  }
+}
+
+// Preenchimento das armas
+function preencherInputsArmas(selectElement, slot) {
+  selectElement.addEventListener("change", () => {
+    const selectedIndex = selectElement.value;
     if (selectedIndex !== "") {
       const arma = armasPadrao[selectedIndex];
       document.getElementById("nomeArma" + slot).value = arma.nome;
@@ -246,16 +261,90 @@ document.querySelectorAll(".selecionarArma").forEach(select => {
       document.getElementById("distanciaArma" + slot).value = arma.distancia;
       document.getElementById("tipoArma" + slot).value = arma.tipo;
     } else {
-      // Se voltar para manual, limpa os campos
       document.getElementById("nomeArma" + slot).value = "";
       document.getElementById("danoArma" + slot).value = "";
       document.getElementById("criticoArma" + slot).value = "";
       document.getElementById("distanciaArma" + slot).value = "";
       document.getElementById("tipoArma" + slot).value = "";
-      
     }
   });
+}
+
+// Inicializa os 6 selects
+for (let i = 1; i <= 6; i++) {
+  const selectElement = document.getElementById("selecionarArma" + i);
+  preencherSelecaoArmas(selectElement);
+  preencherInputsArmas(selectElement, i);
+}
+
+const select = document.getElementById("selecionarArmadura");
+// Estrutura: categorias > grupos > armas
+const estruturaArmadura = {};
+armadurasPadrao.forEach((armadura, i) => {
+  if (!estruturaArmadura[armadura.categoria]) {
+    estruturaArmadura[armadura.categoria] = {};
+  }
+  if (!estruturaArmadura[armadura.categoria][armadura.grupo]) {
+    estruturaArmadura[armadura.categoria][armadura.grupo] = [];
+  }
+  estruturaArmadura[armadura.categoria][armadura.grupo].push({ ...armadura, index: i });
 });
+
+// Preenche o select
+for (const categoria in estruturaArmadura) {
+  const optgroupCategoria = document.createElement("optgroup");
+  optgroupCategoria.label = categoria;
+
+  for (const grupo in estruturaArmadura[categoria]) {
+    // Adiciona um "option" vazio como separador de grupo
+    const optionGrupo = document.createElement("option");
+    optionGrupo.textContent = `--- ${grupo} ---`;
+    optionGrupo.disabled = true; // Serve de título
+    optionGrupo.classList.add("optionTitulosDesativados");
+    optgroupCategoria.appendChild(optionGrupo);
+
+    // Adiciona armadura do grupo
+    estruturaArmadura[categoria][grupo].forEach(arma => {
+      const option = document.createElement("option");
+      option.value = armadura.index;
+      option.textContent = armadura.nome;
+      optgroupCategoria.appendChild(option);
+    });
+  }
+
+  select.appendChild(optgroupCategoria);
+}
+
+/*
+//Preenche a lista com as armaduras padrões
+const armaduraSelecao = document.getElementById("selecionarArmadura");
+    armadurasPadrao.forEach((armadura, i) => {
+    const option = document.createElement("option");
+    option.value = i;
+    option.textContent = armadura.nome;
+    armaduraSelecao.appendChild(option);
+});
+
+//Evento de seleção das armaduras
+armaduraSelecao.addEventListener("change", () => {
+    const selectedIndex = armaduraSelecao.value;
+
+    if (selectedIndex !== ""){
+        const armadura = armadurasPadrao[selectedIndex];
+        document.getElementById("nomeArmadura").value = armadura.nome;
+        document.getElementById("bonusClasseArmadura").value = armadura.bonusCA;
+        document.getElementById("limiteDesArmadura").value = armadura.maxDestreza;
+        document.getElementById("penalidadePerArmadura").value = armadura.penalArmadura;
+    } else {
+        document.getElementById("nomeArmadura").value = "";
+        document.getElementById("bonusClasseArmadura").value = "";
+        document.getElementById("limiteDesArmadura").value = "";
+        document.getElementById("penalidadePerArmadura").value = "";
+    }
+
+    valorArmadura(); limiteDestreza(); penalidadePericias();
+})
+*/
 
 function valorArmadura() {
     var armadura = parseInt(document.getElementById("bonusClasseArmadura").value) || 0;
@@ -299,8 +388,7 @@ function penalidadePericias() {
         campo.value = total;
     })
 
-    calcularAcrobacia(); calcularAtletismo(); calcularFurtividade(); calcularLadinagem();
-    console.log(total);
+    calcularPericia('acrobacia', 'destreza'); calcularPericia('atletismo','forca'); calcularPericia('furtividade','destreza'); calcularPericia('Ladinagem','´destreza');
 }
 
 function limiteDestreza() {

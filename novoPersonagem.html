@@ -1018,7 +1018,7 @@
                         <div class="container">
                             <div class="width_100 espacoArmas">
                                 <h5>Arma 1</h5>
-                                <select id="selecionarArma" class="selecionarArma" data-slot="1">
+                                <select id="selecionarArma1" class="selecionarArma" data-slot="1">
                                     <option value="">Escolha ou preencha manual</option>
                                 </select>
                             </div>
@@ -1044,7 +1044,7 @@
                         <div class="container">
                             <div class="width_100 espacoArmas">
                                 <h5>Arma 2</h5>
-                                <select id="selecionarArma" class="selecionarArma" data-slot="2">
+                                <select id="selecionarArma2" class="selecionarArma" data-slot="2">
                                     <option value="">Escolha ou preencha manual</option>
                                 </select>
                             </div>
@@ -1070,7 +1070,7 @@
                         <div class="container">
                             <div class="width_100 espacoArmas">
                                 <h5>Arma 3</h5>
-                                <select id="selecionarArma" class="selecionarArma" data-slot="3">
+                                <select id="selecionarArma3" class="selecionarArma" data-slot="3">
                                     <option value="">Escolha ou preencha manual</option>
                                 </select>
                             </div>
@@ -1096,7 +1096,7 @@
                         <div class="container">
                             <div class="width_100 espacoArmas">
                                 <h5>Arma 4</h5>
-                                <select id="selecionarArma" class="selecionarArma" data-slot="4">
+                                <select id="selecionarArma4" class="selecionarArma" data-slot="4">
                                     <option value="">Escolha ou preencha manual</option>
                                 </select>
                             </div>
@@ -1122,7 +1122,7 @@
                         <div class="container">
                             <div class="width_100 espacoArmas">
                                 <h5>Arma 5</h5>
-                                <select id="selecionarArma" class="selecionarArma" data-slot="5">
+                                <select id="selecionarArma5" class="selecionarArma" data-slot="5">
                                     <option value="">Escolha ou preencha manual</option>
                                 </select>
                             </div>
@@ -1148,7 +1148,7 @@
                         <div class="container">
                             <div class="width_100 espacoArmas">
                                 <h5>Arma 6</h5>
-                                <select id="selecionarArma" class="selecionarArma" data-slot="6">
+                                <select id="selecionarArma6" class="selecionarArma" data-slot="6">
                                     <option value="">Escolha ou preencha manual</option>
                                 </select>
                             </div>
@@ -1173,24 +1173,30 @@
                         </div>
                     </div>
 
-                    <div class="width_40 tabletTo100">
+                    <div class="width_40 tabletTo100 titulosEquipamentos">
                         <div class="container">
                             <div class="width_40 centerMobile mobileTo25">
-                                <h5>Armaduras</h5>
+                                <h4>Itens de defesa</h4>
                             </div>
                             <div class="width_15 center mobileTo25">
-                                <h5>Bônus na CA</h5>
+                                <h4>CA</h4>
                             </div>
                             <div class="width_25 center mobileTo25">
-                                <h5>Máx. de Destreza</h5>
+                                <h4>Máx. Destreza</h4>
                             </div>
                             <div class="width_20 center mobileTo25">
-                                <h5>Pen. de Armadura</h5>
+                                <h4>Penalidade</h4>
                             </div>
                         </div>
                         <div class="container">
+                            <div class="width_100 espacoArmadura">
+                                <h5>Armadura</h5>
+                                <select id="selecionarArmadura" class="selecionarArmadura">
+                                    <option value="">Escolha ou preencha</option>
+                                </select>
+                            </div>
                             <div class="width_40 mobileTo25 nomeArmaduraEscudoOutros">
-                                <input id="nomeArmadura" type="text" name="nomeArmadura" placeholder="Armadura: Cota de Malha">
+                                <input id="nomeArmadura" type="text" name="nomeArmadura">
                             </div>
                             <div class="width_15 center mobileTo25">
                                 <input id="bonusClasseArmadura" oninput="valorArmadura()" type="text" name="bonusClasseArmadura">
@@ -1203,8 +1209,14 @@
                             </div>
                         </div>
                         <div class="container">
+                            <div class="width_100 espacoEscudo">
+                                <h5>Escudo</h5>
+                                <select id="selecionarEscudo" class="selecionarEscudo">
+                                    <option value="">Escolha ou preencha</option>
+                                </select>
+                            </div>
                             <div class="width_40 mobileTo25 nomeArmaduraEscudoOutros">
-                                <input id="nomeEscudo" type="text" name="nomeEscudo" placeholder="Escudo: Escudo Torre">
+                                <input id="nomeEscudo" type="text" name="nomeEscudo">
                             </div>
                             <div class="width_15 center mobileTo25">
                                 <input id="bonusClasseEscudo" oninput="valorEscudo()" type="text" name="bonusClasseEscudo">
@@ -1277,6 +1289,8 @@
             </form>
         </section>
         <script src="armas.js" defer></script>
+        <script src="armaduras.js" defer></script>
+        <script src="escudos.js" defer></script>
         <script src="scripts.js" defer></script>
     </body>
 </html>
