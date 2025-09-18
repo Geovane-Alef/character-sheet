@@ -277,7 +277,7 @@ for (let i = 1; i <= 6; i++) {
   preencherInputsArmas(selectElement, i);
 }
 
-const select = document.getElementById("selecionarArmadura");
+const armaduraSelecao = document.getElementById("selecionarArmadura");
 // Estrutura: categorias > grupos > armas
 const estruturaArmadura = {};
 armadurasPadrao.forEach((armadura, i) => {
@@ -304,7 +304,7 @@ for (const categoria in estruturaArmadura) {
     optgroupCategoria.appendChild(optionGrupo);
 
     // Adiciona armadura do grupo
-    estruturaArmadura[categoria][grupo].forEach(arma => {
+    estruturaArmadura[categoria][grupo].forEach(armadura => {
       const option = document.createElement("option");
       option.value = armadura.index;
       option.textContent = armadura.nome;
@@ -312,18 +312,8 @@ for (const categoria in estruturaArmadura) {
     });
   }
 
-  select.appendChild(optgroupCategoria);
+  armaduraSelecao.appendChild(optgroupCategoria);
 }
-
-/*
-//Preenche a lista com as armaduras padrões
-const armaduraSelecao = document.getElementById("selecionarArmadura");
-    armadurasPadrao.forEach((armadura, i) => {
-    const option = document.createElement("option");
-    option.value = i;
-    option.textContent = armadura.nome;
-    armaduraSelecao.appendChild(option);
-});
 
 //Evento de seleção das armaduras
 armaduraSelecao.addEventListener("change", () => {
@@ -344,7 +334,65 @@ armaduraSelecao.addEventListener("change", () => {
 
     valorArmadura(); limiteDestreza(); penalidadePericias();
 })
-*/
+
+
+const escudoSelecao = document.getElementById("selecionarEscudo");
+// Estrutura: categorias > grupos > armas
+const estruturaEscudo = {};
+escudosPadrao.forEach((escudo, i) => {
+  if (!estruturaEscudo[escudo.categoria]) {
+    estruturaEscudo[escudo.categoria] = {};
+  }
+  if (!estruturaEscudo[escudo.categoria][escudo.grupo]) {
+    estruturaEscudo[escudo.categoria][escudo.grupo] = [];
+  }
+  estruturaEscudo[escudo.categoria][escudo.grupo].push({ ...escudo, index: i });
+});
+
+// Preenche o select dos escudos
+for (const categoria in estruturaEscudo) {
+  const optgroupCategoria = document.createElement("optgroup");
+  optgroupCategoria.label = categoria;
+
+  for (const grupo in estruturaEscudo[categoria]) {
+    // Adiciona um "option" vazio como separador de grupo
+    const optionGrupo = document.createElement("option");
+    optionGrupo.textContent = `--- ${grupo} ---`;
+    optionGrupo.disabled = true; // Serve de título
+    optionGrupo.classList.add("optionTitulosDesativados");
+    optgroupCategoria.appendChild(optionGrupo);
+
+    // Adiciona o escudo do grupo
+    estruturaEscudo[categoria][grupo].forEach(escudo => {
+      const option = document.createElement("option");
+      option.value = escudo.index;
+      option.textContent = escudo.nome;
+      optgroupCategoria.appendChild(option);
+    });
+  }
+
+  escudoSelecao.appendChild(optgroupCategoria);
+}
+
+//Evento de seleção dos escudos
+escudoSelecao.addEventListener("change", () => {
+    const selectedIndex = escudoSelecao.value;
+
+    if (selectedIndex !== ""){
+        const escudo = escudosPadrao[selectedIndex];
+        document.getElementById("nomeEscudo").value = escudo.nome;
+        document.getElementById("bonusClasseEscudo").value = escudo.bonusCA;
+        document.getElementById("limiteDesEscudo").value = escudo.maxDestreza;
+        document.getElementById("penalidadePerEscudo").value = escudo.penalArmadura;
+    } else {
+        document.getElementById("nomeEscudo").value = "";
+        document.getElementById("bonusClasseEscudo").value = "";
+        document.getElementById("limiteDesEscudo").value = "";
+        document.getElementById("penalidadePerEscudo").value = "";
+    }
+
+    valorEscudo(); limiteDestreza(); penalidadePericias();
+})
 
 function valorArmadura() {
     var armadura = parseInt(document.getElementById("bonusClasseArmadura").value) || 0;
