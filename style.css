@@ -1,6 +1,7 @@
 body {
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-family: 'Metamorphous', 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     margin: 0 0 35px;
+    background-color: #FCF0C6;
 }
 
 section{
@@ -8,20 +9,47 @@ section{
     margin: auto;    
 }
 
-h1 {
-    font-size: 30px;
+.jacquard {
+    font-family: "Jacquard 24", system-ui;
+    font-weight: 400;
+    font-style: normal;
 }
 
+.macondo {
+  font-family: "Macondo", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.quintessential {
+  font-family: "Quintessential", serif;
+  font-weight: 400;
+  font-style: normal;
+}
 label, select {
     font-size: 15px;
+    background-color: #FCF0C6;
+}
+
+input {
+    background-color: #FCF0C6;
+}
+
+h1 {
+    font-size: 50px;
+}
+
+
+h4 {
+    font-size: 20px;
 }
 
 h5 {
-    font-size: 14px;
+    font-size: 18px;
 }
 
 h6 {
-    font-size: 12px;
+    font-size: 14px;
     margin: 0px 0px 10px 0px;
 }
 
@@ -102,12 +130,21 @@ h6 {
     border-right:  2px solid transparent;
 }
 
-.infoBasicas select {
+.infoBasicas select, #infoPericias select, #equipaveisVestidos select {
     height: 26px;
     border-top: 2px solid transparent;
     border-left:  2px solid transparent;
     border-right:  2px solid transparent;
     border-bottom: 2px solid black;
+}
+
+.periciaExtra {
+    height: 20px;
+    border-top: 2px solid transparent !important;
+    border-left:  2px solid transparent !important;
+    border-right:  2px solid transparent !important;
+    border-bottom: 2px solid black !important;
+    border-radius: 0px !important;
 }
 
 #nomePersonagem {
@@ -128,7 +165,16 @@ h6 {
     display: flex;
 }
 
-#infoFisico div input {
+#infoFisico input, #infoPericias input, #ataques input {
+    border: solid 1px #000;
+    border-radius: 10px;
+}
+
+.habilidades img {
+    margin-left: 10px;
+}
+
+#infoFisico div input, .caixaInfoPericias, #ataqueCorpo input, #ataqueDistancia input  {
     width: 30px;
     height: 30px;
     margin: 5px 0px;
@@ -145,22 +191,12 @@ h6 {
     justify-content: space-evenly;
 }
 
-#infoPericias .width_10 {
+#infoPericias .width_10, #infoPericias .width_40 {
     display: flex;
     justify-content: space-evenly;
 }
 
-#infoPericias .width_40 {
-    display: flex;
-    justify-content: space-evenly;
-}
-
-#infoPericias .width_40 {
-    display: flex;
-    align-items: center;
-}
-
-#infoPericias .width_50 {
+#infoPericias .width_40, #infoPericias .width_50 {
     display: flex;
     align-items: center;
 }
@@ -169,43 +205,17 @@ h6 {
     margin: 0;
 }
 
-.caixaInfoPericias {
-    width: 30px;
-    height: 30px;
-    text-align: center;
-    margin: 5px 0px;
-}
-
 #ataques {
     justify-content: space-evenly;
 }
 
-#ataqueCorpo div .width_18 {
+#ataqueCorpo div .width_18, #ataqueDistancia div .width_18 {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-#ataqueCorpo div .width_72 {
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-}
-
-#ataqueCorpo input, #ataqueDistancia input {
-    width: 30px;
-    height: 30px;
-    text-align: center;
-    margin: 5px 0px;
-}
-
-#ataqueDistancia div .width_18 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-#ataqueDistancia div .width_72 {
+#ataqueCorpo div .width_72, #ataqueDistancia div .width_72 {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
