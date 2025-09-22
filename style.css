@@ -17,13 +17,13 @@ section{
 
 .macondo {
   font-family: "Macondo", cursive;
-  font-weight: 400;
+  font-weight: 800;
   font-style: normal;
 }
 
 .quintessential {
   font-family: "Quintessential", serif;
-  font-weight: 400;
+  font-weight: 800;
   font-style: normal;
 }
 label, select {
@@ -39,7 +39,6 @@ h1 {
     font-size: 50px;
 }
 
-
 h4 {
     font-size: 20px;
 }
@@ -49,8 +48,8 @@ h5 {
 }
 
 h6 {
-    font-size: 14px;
-    margin: 0px 0px 10px 0px;
+    font-size: 15px;
+    margin: 10px 0px;
 }
 
 .container {
@@ -115,15 +114,27 @@ h6 {
     width: 60%;
 }
 
-.width_72 {
+.width_67 {
     width: 67%;
+}
+
+.width_70 {
+    width: 70%;
+}
+
+.width_80 {
+    width: 80%;
+}
+
+.width_85 {
+    width: 85%;
 }
 
 .width_100 {
     width: 100%;
 }
 
-.infoBasicas input, #equipaveisVestidos div input{
+.infoBasicas input, #equipaveisVestidos input, #habilidadesRacaClasse input, #inventario input{
     height: 20px;
     border-top: 2px solid transparent;
     border-left:  2px solid transparent;
@@ -215,13 +226,13 @@ h6 {
     align-items: center;
 }
 
-#ataqueCorpo div .width_72, #ataqueDistancia div .width_72 {
+#ataqueCorpo div .width_67, #ataqueDistancia div .width_67 {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
 }
 
-#equipaveisVestidos .center {
+.center {
     display: flex;
     justify-content: center;
 }
@@ -235,13 +246,12 @@ h6 {
     display: flex;
 }
 
-#equipaveisVestidos .titulosEquipamentos h4 {
+#equipaveisVestidos .titulosEquipamentos h4, #habilidadesRacaClasse h4, #informacaoAdicional h4, #informacaoAdicional h5 {
     margin: 10px 0px;
 }
 
 #equipaveisVestidos .espacoArmas h5,.espacoArmadura h5, .espacoEscudo h5 {
     margin: 0px 10px 0px 0px;
-
 }
 
 #equipaveisVestidos .container {
@@ -260,6 +270,20 @@ h6 {
 .nomeArmaduraEscudoOutros input{
     width: 192px !important; 
     text-align: left !important;
+}
+
+#habilidadeRaca input {
+    width: 90%;
+}
+
+#habilidadeClasse {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+#habilidadeClasse input {
+    width: 45%;
 }
 
 .hideDesktop {
