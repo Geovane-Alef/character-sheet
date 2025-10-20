@@ -344,6 +344,10 @@ h6 {
         font-size: 13px;
     }
 
+    .infoBasicas {
+        justify-content: space-evenly;
+    }
+
     #nomePersonagem {
         width: 100px;
     }
@@ -418,6 +422,10 @@ h6 {
 
     #infoFisico .width_60 span, #infoPericias span, .calculoPericias span, #ataques div span {
         display: none;
+    }
+
+    #infoFisico .width_33 {
+        width: 33%;
     }
 
     #infoPericias .width_40 {
