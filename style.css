@@ -5,7 +5,7 @@ body {
 }
 
 section{
-    width: 80%;
+    width: 85%;
     margin: auto;    
 }
 
@@ -136,9 +136,9 @@ h6 {
 
 .infoBasicas input, #equipaveisVestidos input, #habilidadesRacaClasse input, #inventario input{
     height: 20px;
-    border-top: 2px solid transparent;
-    border-left:  2px solid transparent;
-    border-right:  2px solid transparent;
+    border-top: 0px solid transparent;
+    border-left:  0px solid transparent;
+    border-right:  0px solid transparent;
 }
 
 .infoBasicas select, #infoPericias select, #equipaveisVestidos select {
@@ -263,7 +263,7 @@ h6 {
 }
 
 .nomeArmas input {
-    width: 300px !important; 
+    width: 100% !important; 
     text-align: left !important;
 }
 
@@ -289,7 +289,7 @@ h6 {
 .hideDesktop {
     display: none;
 }
-@media screen and (max-width: 1400px) {
+@media screen and (max-width: 1350px) {
     section {
         width: 95%;
     }
