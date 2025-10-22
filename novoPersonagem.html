@@ -36,7 +36,7 @@
                     </div>
                     
                     <div>
-                        <label for="racaPersonagem">Raça: </label>
+                        <label id="escolhaRacas" for="racaPersonagem" title="Clique aqui para saber mais sobre as raças">Raça: </label>
                         <select id="racaPersonagem" name="racaPersonagem" onchange="racaEscolhida()">
                             <option name="" value="" disabled selected>Escolha</option>
                             <option name="AN" value="AN">Anão</option>
@@ -53,6 +53,23 @@
                         </select>
                     </div>
 
+                    <!-- invisível até ser acionado -->
+                    <div id="modalRacas" class="modal">
+                        <div class="modal-content">
+                            <span id="fecharRacas" class="fechar">&times;</span>
+                            <h2>Raças disponíveis</h2>
+                            <div class="container">
+                                <h4 class="macondo" id="racaHumano" onclick="descreveRaca()">Humano<h4>
+                                <h4 class="macondo" id="racaElfo" onclick="descreveRaca()">Elfo</h4>
+                                <h4 class="macondo" id="">Anão</h4>
+                            </div>
+                            <div id="racasMoveis">
+                                <div class="racas">Humano</div>
+                                <div class="racas">Elfo</div>
+                            </div>
+                        </div>
+                    </div>
+                
                     <div>
                         <label for="classePersonagem">Classe: </label>
                         <select id="classePersonagem" name="classePersonagem" onchange="classeEscolhida()">
@@ -1395,10 +1412,10 @@
                                 <input class="width_15" id="inventarioPeso20" type="text">
                                 <div class="container">
                                     <div class="width_85">
-                                        <h6>Carga total do personagem</h6>
+                                        <h5 class="macondo">Carga total do personagem</h5>
                                     </div>
                                     <div class="width_15">
-                                        <h6 id="pesoTotal"></h6>
+                                        <h5 id="pesoTotal" class="macondo"></h5>
                                     </div>
                                 </div>
                             </div>

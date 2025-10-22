@@ -494,3 +494,42 @@ function limiteDestreza() {
         calcularModificador('destreza');
     }
 }
+
+// Modal das raças
+let abrir = document.getElementById("escolhaRacas");
+let modal = document.getElementById("modalRacas");
+let fechar = document.getElementById("fecharRacas");
+
+// Abrir o modal
+abrir.addEventListener("click", () => {
+  modal.style.display = "flex"; // aparece centralizado
+});
+
+// Fechar ao clicar no "x"
+fechar.addEventListener("click", () => {
+  modal.style.display = "none";
+});
+
+// Fechar ao clicar fora do conteúdo
+window.addEventListener("click", (event) => {
+  if (event.target === modal) {
+    modal.style.display = "none";
+  }
+});
+
+// Seletor das raças
+function descreveRaca() {
+
+let racaAtual = 0;
+
+if (racaAtual < 1) {
+    racaAtual++;
+    document.getElementById('racasMoveis').style.transform = `translateX(-${racaAtual} - 100vw)`;
+  };
+
+if (racaAtual > 0) {
+  racaAtual--;
+  document.getElementById('racasMoveis').style.transform = `translateX(-${racaAtual} - 100vw)`;
+}
+;
+}
