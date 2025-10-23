@@ -512,7 +512,7 @@ fecharRaca.addEventListener("click", () => {
 
 // Fechar ao clicar fora do conteúdo
 window.addEventListener("click", (event) => {
-  if (event.target === modal) {
+  if (event.target === modalRaca) {
     modalRaca.style.display = "none";
   }
 });
@@ -549,7 +549,7 @@ fecharClasse.addEventListener("click", () => {
 
 // Fechar ao clicar fora do conteúdo
 window.addEventListener("click", (event) => {
-  if (event.target === modal) {
+  if (event.target === modalClasse) {
     modalClasse.style.display = "none";
   }
 });
