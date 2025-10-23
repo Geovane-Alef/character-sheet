@@ -496,40 +496,71 @@ function limiteDestreza() {
 }
 
 // Modal das raças
-let abrir = document.getElementById("escolhaRacas");
-let modal = document.getElementById("modalRacas");
-let fechar = document.getElementById("fecharRacas");
+let abrirRaca = document.getElementById("descricaoRacas");
+let modalRaca = document.getElementById("modalRacas");
+let fecharRaca = document.getElementById("fecharRacas");
 
 // Abrir o modal
-abrir.addEventListener("click", () => {
-  modal.style.display = "flex"; // aparece centralizado
+abrirRaca.addEventListener("click", () => {
+  modalRaca.style.display = "flex"; // aparece centralizado
 });
 
 // Fechar ao clicar no "x"
-fechar.addEventListener("click", () => {
-  modal.style.display = "none";
+fecharRaca.addEventListener("click", () => {
+  modalRaca.style.display = "none";
 });
 
 // Fechar ao clicar fora do conteúdo
 window.addEventListener("click", (event) => {
   if (event.target === modal) {
-    modal.style.display = "none";
+    modalRaca.style.display = "none";
   }
 });
 
-// Seletor das raças
-function descreveRaca() {
-
+// Variáveis responsáveis pela posição do carrossel
 let racaAtual = 0;
+let classeAtual = 0;
 
-if (racaAtual < 1) {
-    racaAtual++;
-    document.getElementById('racasMoveis').style.transform = `translateX(-${racaAtual} - 100vw)`;
-  };
+// Seletor das raças (carrossel)
+function descreveRaca(indice) {
+  let container = document.getElementById('racasMoveis');
+  let totalRacas = document.querySelectorAll('#racasMoveis, .raca').lenght;
 
-if (racaAtual > 0) {
-  racaAtual--;
-  document.getElementById('racasMoveis').style.transform = `translateX(-${racaAtual} - 100vw)`;
+  if (indice < 0 || indice >= totalRacas) return;
+
+  racaAtual = indice;
+  container.style.transform = `translateX(-${racaAtual * 100}%)`;
 }
-;
+
+// Modal das classes
+let abrirClasse = document.getElementById("descricaoClasse");
+let modalClasse = document.getElementById("modalClasse");
+let fecharClasse = document.getElementById("fecharClasse");
+
+// Abrir o modal
+abrirClasse.addEventListener("click", () => {
+  modalClasse.style.display = "flex"; // aparece centralizado
+});
+
+// Fechar ao clicar no "x"
+fecharClasse.addEventListener("click", () => {
+  modalClasse.style.display = "none";
+});
+
+// Fechar ao clicar fora do conteúdo
+window.addEventListener("click", (event) => {
+  if (event.target === modal) {
+    modalClasse.style.display = "none";
+  }
+});
+
+// Seletor das classes (carrossel)
+function descreveClasse(indice) {
+  let container = document.getElementById('classesMoveis');
+  let totalClasses = document.querySelectorAll('#classesMoveis, .classe').lenght;
+
+  if (indice < 0 || indice >= totalClasses) return;
+
+  classeAtual = indice;
+  container.style.transform = `translateX(-${classeAtual * 100}%)`;
 }

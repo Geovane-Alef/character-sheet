@@ -294,7 +294,7 @@ h6 {
     display: none;
 }
 
-/* Configuração do modal das Raças*/
+/* Configuração do modal*/
 .modal {
     display: none; /* escondido por padrão */
     position: fixed;
@@ -312,7 +312,7 @@ h6 {
     padding: 20px;
     border-radius: 12px;
     width: 80%;
-    max-width: 500px;
+    max-width: 800px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     position: relative;
     animation: aparecer 0.3s ease;
@@ -331,33 +331,29 @@ h6 {
     to { opacity: 1; transform: scale(1); }
 }
 
-#escolhaRaca label {
+#descricaoRaca label, #descricaoClasse label {
     font-weight: bold;
     cursor: pointer;
 }
 
-#racasMoveis {
+/* Impede do conteúdo do carrossel sair da DIV */
+#racasWrap, #classeWrap {
+    width: 100%;
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+#racasMoveis, #classesMoveis {
   display: flex;
-  width: 200%;
-  transition: transform 0.5s ease-in-out;
+  width: 300%;
+  transition: transform 0.5s ease;
+  max-width: 100%;
 }
 
-.racas {
-    width: 10vw;
-    height: 10vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 2rem;
-    color: white;
-}
-
-#racaHumano {
-  color: #3498db;
-}
-
-#racaElfo {
-  color: #e74c3c;
+.racas, .classes {
+    min-width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
 }
 
 @media screen and (max-width: 1350px) {

@@ -36,7 +36,7 @@
                     </div>
                     
                     <div>
-                        <label id="escolhaRacas" for="racaPersonagem" title="Clique aqui para saber mais sobre as raças">Raça: </label>
+                        <label id="descricaoRacas" for="racaPersonagem" title="Clique aqui para saber mais sobre as raças">Raça: </label>
                         <select id="racaPersonagem" name="racaPersonagem" onchange="racaEscolhida()">
                             <option name="" value="" disabled selected>Escolha</option>
                             <option name="AN" value="AN">Anão</option>
@@ -59,19 +59,22 @@
                             <span id="fecharRacas" class="fechar">&times;</span>
                             <h2>Raças disponíveis</h2>
                             <div class="container">
-                                <h4 class="macondo" id="racaHumano" onclick="descreveRaca()">Humano<h4>
-                                <h4 class="macondo" id="racaElfo" onclick="descreveRaca()">Elfo</h4>
-                                <h4 class="macondo" id="">Anão</h4>
+                                <h4 class="macondo raca" onmouseenter="descreveRaca(0)">Humano<h4>
+                                <h4 class="macondo raca" onmouseenter="descreveRaca(1)">Elfo</h4>
+                                <h4 class="macondo raca" onmouseenter="descreveRaca(2)">Anão</h4>
                             </div>
-                            <div id="racasMoveis">
-                                <div class="racas">Humano</div>
-                                <div class="racas">Elfo</div>
+                            <div id="racasWrap">
+                                <div id="racasMoveis">
+                                    <div class="racas">Humano</div>
+                                    <div class="racas">Elfo</div>
+                                    <div class="racas">Anão</div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 
                     <div>
-                        <label for="classePersonagem">Classe: </label>
+                        <label id="descricaoClasse" for="classePersonagem" title="Clique aqui para saber mais sobre as classes">Classe: </label>
                         <select id="classePersonagem" name="classePersonagem" onchange="classeEscolhida()">
                             <option name="" value="" disabled selected>Escolha</option>
                             <option name="BBR" value="BBR">Bárbaro</option>
@@ -88,6 +91,26 @@
                             <option name="SMR" value="SMR">Samurai</option>
                             <option name="SWB" value="SWB">Swashbuckler</option>
                         </select>
+                    </div>
+
+                    <!-- invisível até ser acionado -->
+                    <div id="modalClasse" class="modal">
+                        <div class="modal-content">
+                            <span id="fecharClasse" class="fechar">&times;</span>
+                            <h2>Classe disponíveis</h2>
+                            <div class="container">
+                                <h4 class="macondo classe" onmouseenter="descreveClasse(0)">Bárbaro<h4>
+                                <h4 class="macondo classe" onmouseenter="descreveClasse(1)">Bardo</h4>
+                                <h4 class="macondo classe" onmouseenter="descreveClasse(2)">Clérigo</h4>
+                            </div>
+                            <div id="classeWrap">
+                                <div id="classesMoveis">
+                                    <div class="classes">Bárbaro</div>
+                                    <div class="classes">Bardo</div>
+                                    <div class="classes">Clérigo</div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                     <div>
