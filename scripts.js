@@ -524,12 +524,22 @@ let classeAtual = 0;
 // Seletor das raças (carrossel)
 function descreveRaca(indice) {
   let container = document.getElementById('racasMoveis');
-  let totalRacas = document.querySelectorAll('#racasMoveis, .raca').lenght;
+  let labels = document.querySelectorAll('#modalRacas h4');
+  let racas = document.querySelectorAll('#racasMoveis .racas');
+  let totalRacas = racas.length;
 
   if (indice < 0 || indice >= totalRacas) return;
 
+  // Ajusta o width do container
+  container.style.width = `${totalRacas * 100}%`;
+
   racaAtual = indice;
+  // move o carrossel (cada item ocupa 100%)
   container.style.transform = `translateX(-${racaAtual * 100}%)`;
+
+  // limpa seleção anterior e aplica na atual
+  labels.forEach(el => el.classList.remove('botaoSelecionado'));
+  labels[indice].classList.add('botaoSelecionado');
 }
 
 // Modal das classes
@@ -557,10 +567,21 @@ window.addEventListener("click", (event) => {
 // Seletor das classes (carrossel)
 function descreveClasse(indice) {
   let container = document.getElementById('classesMoveis');
-  let totalClasses = document.querySelectorAll('#classesMoveis, .classe').lenght;
+  let labels = document.querySelectorAll('#modalClasse h4');
+  let classes = document.querySelectorAll('#classesMoveis .classes');
+  let totalClasses = classes.length;
 
   if (indice < 0 || indice >= totalClasses) return;
 
+  // Ajusta o width do container
+  container.style.width = `${totalClasses * 100}%`;
+
   classeAtual = indice;
+  // move o carrossel (cada item ocupa 100%)
   container.style.transform = `translateX(-${classeAtual * 100}%)`;
+
+  // limpa seleção anterior e aplica na atual
+  labels.forEach(el => el.classList.remove('botaoSelecionado'));
+  labels[indice].classList.add('botaoSelecionado');
+  console.log(classeAtual);
 }
