@@ -517,32 +517,118 @@ window.addEventListener("click", (event) => {
   }
 });
 
-// Variáveis responsáveis pela posição do carrossel
-let racaAtual = 0;
-let classeAtual = 0;
-
-// Seletor das raças (carrossel)
-function descreveRaca(indice) {
+// certifique-se de rodar após DOM ready
+document.addEventListener('DOMContentLoaded', () => {
   let container = document.getElementById('racasMoveis');
-  let labels = document.querySelectorAll('#modalRacas h4');
-  let racas = document.querySelectorAll('#racasMoveis .racas');
-  let totalRacas = racas.length;
+  let wrap = document.getElementById('racasWrap');
+  let labels = Array.from(document.querySelectorAll('#modalRacas .container .raca')); // seus h4 têm classe raca
+  let slides = Array.from(document.querySelectorAll('#racasMoveis .racas'));
 
-  if (indice < 0 || indice >= totalRacas) return;
+  let racaAtual = 0;
 
-  // Ajusta o width do container
-  container.style.width = `${totalRacas * 100}%`;
+  if (!container || !wrap || slides.length === 0) {
+    console.error('Carrossel: elementos inexistentes');
+    return;
+  }
 
-  racaAtual = indice;
-  // move o carrossel (cada item ocupa 100%)
-  container.style.transform = `translateX(-${racaAtual * 100}%)`;
+  // ajusta largura total do container dinamicamente
+  function ajustarLarguraContainer() {
+    container.style.width = `${slides.length * 100}%`;
+    // garante que cada slide ocupe largura do wrap
+    slides.forEach(s => s.style.minWidth = `${wrap.clientWidth}px`);
+  }
 
-  // limpa seleção anterior e aplica na atual
-  labels.forEach(el => el.classList.remove('botaoSelecionado'));
-  labels[indice].classList.add('botaoSelecionado');
-}
+  // função que ajusta a altura do wrap ao conteúdo do slide atual
+  function ajustarAlturaAtual(indice = racaAtual) {
+    let slide = slides[indice];
+    if (!slide) return;
+
+    // Forçar recálculo do layout em próximos frames para pegar altura correta
+    // (útil se conteúdo acabou de ser alterado ou renderizado)
+    requestAnimationFrame(() => {
+      // um rAF extra costuma garantir leitura pós-render
+      requestAnimationFrame(() => {
+        // Use scrollHeight do slide — contém altura total do conteúdo
+        let h = slide.scrollHeight;
+        // Opcional: limite máximo (por exemplo 75vh)
+        let maxH = Math.floor(window.innerHeight * 0.75);
+        let finalH = Math.min(h, maxH);
+
+        wrap.style.height = finalH + 'px';
+      });
+    });
+  }
+
+  // função para mover para índice (usa pixels para precisão)
+  function moverPara(indice, suave = true) {
+    if (indice < 0 || indice >= slides.length) return;
+    racaAtual = indice;
+
+    // garante largura atualizada (útil em resize)
+    ajustarLarguraContainer();
+
+    let desloc = indice * wrap.clientWidth;
+
+    if (!suave) {
+      container.style.transition = 'none';
+      container.style.transform = `translateX(-${desloc}px)`;
+      // força reflow e restaura transição
+      void container.offsetWidth;
+      container.style.transition = '';
+    } else {
+      container.style.transform = `translateX(-${desloc}px)`;
+    }
+
+    // ajusta altura de acordo com o slide recém exibido
+    ajustarAlturaAtual(indice);
+
+    // atualiza seleção visual (caso use labels array)
+    labels.forEach(l => l.classList.remove('botaoSelecionado'));
+    if (labels[indice]) labels[indice].classList.add('botaoSelecionado');
+  }
+
+  // listeners nas labels (se quiser também manter onmouseenter inline, sem problemas)
+  labels.forEach((el, i) => {
+    el.setAttribute('data-idx', i);
+    el.addEventListener('mouseenter', () => moverPara(i));
+    el.addEventListener('click', () => moverPara(i));
+    el.addEventListener('focus', () => moverPara(i));
+  });
+
+  // recalcula tudo no resize
+  window.addEventListener('resize', () => {
+    ajustarLarguraContainer();
+    ajustarAlturaAtual();
+  });
+
+  // inicialização
+  ajustarLarguraContainer();
+  // espera o modal aparecer na tela antes de medir a altura
+  let modalRacas = document.getElementById('modalRacas');
+  if (modalRacas) {
+    let observerModal = new MutationObserver(() => {
+      if (getComputedStyle(modalRacas).display !== 'none') {
+        // pequeno atraso para garantir o layout renderizado
+        setTimeout(() => {
+          moverPara(0, false);
+          ajustarAlturaAtual();
+        }, 100);
+        observerModal.disconnect();
+      }
+    });
+    observerModal.observe(modalRacas, { attributes: true, attributeFilter: ['style', 'class'] });
+  } else {
+    // fallback se modalRacas não for encontrado
+    moverPara(0, false);
+    ajustarAlturaAtual();
+  }
+
+  // expõe para debug
+  window._moverParaRaca = moverPara;
+});
 
 // Modal das classes
+let classeAtual = 0;
 let abrirClasse = document.getElementById("descricaoClasse");
 let modalClasse = document.getElementById("modalClasse");
 let fecharClasse = document.getElementById("fecharClasse");

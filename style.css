@@ -421,7 +421,6 @@ h6 {
     min-width: 100%;
     padding: 20px;
     box-sizing: border-box;
-    overflow-wrap: break-word;
     word-wrap: normal;
     white-space: normal;
 
