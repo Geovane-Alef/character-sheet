@@ -476,6 +476,18 @@ h6 {
     background: #7a3a3b;
 }
 
+.racas p {
+    font-size: 12px;
+}
+
+.racas li p {
+    font-size: 11px;
+}
+
+.racas span {
+    font-weight: bold;
+}
+
 /* Estilos dos botões de raça */
 .raca {
     width: 100%;
