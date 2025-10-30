@@ -502,129 +502,113 @@ let fecharRaca = document.getElementById("fecharRacas");
 
 // Abrir o modal
 abrirRaca.addEventListener("click", () => {
-  modalRaca.style.display = "flex"; // aparece centralizado
+    modalRaca.style.display = "flex";
+    // Inicializa o carrossel quando o modal abre
+    setTimeout(() => {
+        if (window.inicializarCarrossel) {
+            window.inicializarCarrossel();
+        }
+    }, 50);
 });
 
-// Fechar ao clicar no "x"
+// Fechar o modal
 fecharRaca.addEventListener("click", () => {
-  modalRaca.style.display = "none";
-});
-
-// Fechar ao clicar fora do conteúdo
-window.addEventListener("click", (event) => {
-  if (event.target === modalRaca) {
     modalRaca.style.display = "none";
-  }
 });
 
-// certifique-se de rodar após DOM ready
+window.addEventListener("click", (event) => {
+    if (event.target === modalRaca) {
+        modalRaca.style.display = "none";
+    }
+});
+
+// Carrossel - Versão Corrigida
 document.addEventListener('DOMContentLoaded', () => {
-  let container = document.getElementById('racasMoveis');
-  let wrap = document.getElementById('racasWrap');
-  let labels = Array.from(document.querySelectorAll('#modalRacas .container .raca')); // seus h4 têm classe raca
-  let slides = Array.from(document.querySelectorAll('#racasMoveis .racas'));
+    let container = document.getElementById('racasMoveis');
+    let wrap = document.getElementById('racasWrap');
+    let labels = Array.from(document.querySelectorAll('.racas-lista .raca'));
+    let slides = Array.from(document.querySelectorAll('#racasMoveis .racas'));
+    
+    let racaAtual = 0;
 
-  let racaAtual = 0;
-
-  if (!container || !wrap || slides.length === 0) {
-    console.error('Carrossel: elementos inexistentes');
-    return;
-  }
-
-  // ajusta largura total do container dinamicamente
-  function ajustarLarguraContainer() {
-    container.style.width = `${slides.length * 100}%`;
-    // garante que cada slide ocupe largura do wrap
-    slides.forEach(s => s.style.minWidth = `${wrap.clientWidth}px`);
-  }
-
-  // função que ajusta a altura do wrap ao conteúdo do slide atual
-  function ajustarAlturaAtual(indice = racaAtual) {
-    let slide = slides[indice];
-    if (!slide) return;
-
-    // Forçar recálculo do layout em próximos frames para pegar altura correta
-    // (útil se conteúdo acabou de ser alterado ou renderizado)
-    requestAnimationFrame(() => {
-      // um rAF extra costuma garantir leitura pós-render
-      requestAnimationFrame(() => {
-        // Use scrollHeight do slide — contém altura total do conteúdo
-        let h = slide.scrollHeight;
-        // Opcional: limite máximo (por exemplo 75vh)
-        let maxH = Math.floor(window.innerHeight * 0.75);
-        let finalH = Math.min(h, maxH);
-
-        wrap.style.height = finalH + 'px';
-      });
-    });
-  }
-
-  // função para mover para índice (usa pixels para precisão)
-  function moverPara(indice, suave = true) {
-    if (indice < 0 || indice >= slides.length) return;
-    racaAtual = indice;
-
-    // garante largura atualizada (útil em resize)
-    ajustarLarguraContainer();
-
-    let desloc = indice * wrap.clientWidth;
-
-    if (!suave) {
-      container.style.transition = 'none';
-      container.style.transform = `translateX(-${desloc}px)`;
-      // força reflow e restaura transição
-      void container.offsetWidth;
-      container.style.transition = '';
-    } else {
-      container.style.transform = `translateX(-${desloc}px)`;
+    function inicializarCarrossel() {
+        if (!container || !wrap) return;
+        
+        // Configura largura do container para N slides
+        container.style.width = `${slides.length * 100}%`;
+        
+        // Configura cada slide para ocupar exatamente 1/N da largura total
+        slides.forEach(slide => {
+            slide.style.width = `${100 / slides.length}%`;
+        });
+        
+        // Move para a primeira raça
+        moverPara(0, false);
+        
+        console.log('Carrossel inicializado com', slides.length, 'slides');
     }
 
-    // ajusta altura de acordo com o slide recém exibido
-    ajustarAlturaAtual(indice);
+    function moverPara(indice, suave = true) {
+        if (indice < 0 || indice >= slides.length) return;
+        
+        // Calcula o deslocamento baseado na largura VISÍVEL do wrap
+        const larguraVisivel = wrap.clientWidth;
+        const deslocamento = indice * larguraVisivel;
+        
+        if (!suave) {
+            container.style.transition = 'none';
+            container.style.transform = `translateX(-${deslocamento}px)`;
+            void container.offsetWidth; // Força reflow
+            container.style.transition = 'transform 0.6s ease-in-out';
+        } else {
+            container.style.transform = `translateX(-${deslocamento}px)`;
+        }
+        
+        racaAtual = indice;
+        
+        // Atualiza seleção visual
+        labels.forEach(l => l.classList.remove('botaoSelecionado'));
+        if (labels[indice]) labels[indice].classList.add('botaoSelecionado');
+        
+        console.log(`Movido para raça ${indice}, deslocamento: ${deslocamento}px`);
+    }
 
-    // atualiza seleção visual (caso use labels array)
-    labels.forEach(l => l.classList.remove('botaoSelecionado'));
-    if (labels[indice]) labels[indice].classList.add('botaoSelecionado');
-  }
-
-  // listeners nas labels (se quiser também manter onmouseenter inline, sem problemas)
-  labels.forEach((el, i) => {
-    el.setAttribute('data-idx', i);
-    el.addEventListener('mouseenter', () => moverPara(i));
-    el.addEventListener('click', () => moverPara(i));
-    el.addEventListener('focus', () => moverPara(i));
-  });
-
-  // recalcula tudo no resize
-  window.addEventListener('resize', () => {
-    ajustarLarguraContainer();
-    ajustarAlturaAtual();
-  });
-
-  // inicialização
-  ajustarLarguraContainer();
-  // espera o modal aparecer na tela antes de medir a altura
-  let modalRacas = document.getElementById('modalRacas');
-  if (modalRacas) {
-    let observerModal = new MutationObserver(() => {
-      if (getComputedStyle(modalRacas).display !== 'none') {
-        // pequeno atraso para garantir o layout renderizado
-        setTimeout(() => {
-          moverPara(0, false);
-          ajustarAlturaAtual();
-        }, 100);
-        observerModal.disconnect();
-      }
+    // Adiciona eventos aos botões
+    labels.forEach((el, i) => {
+        el.addEventListener('mouseenter', () => moverPara(i));
+        el.addEventListener('click', () => moverPara(i));
     });
-    observerModal.observe(modalRacas, { attributes: true, attributeFilter: ['style', 'class'] });
-  } else {
-    // fallback se modalRacas não for encontrado
-    moverPara(0, false);
-    ajustarAlturaAtual();
-  }
 
-  // expõe para debug
-  window._moverParaRaca = moverPara;
+    // Inicializa quando o modal abrir
+    if (modalRaca) {
+        const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                if (mutation.attributeName === 'style') {
+                    const displayStyle = getComputedStyle(modalRaca).display;
+                    if (displayStyle === 'flex') {
+                        setTimeout(() => {
+                            inicializarCarrossel();
+                        }, 100);
+                    }
+                }
+            });
+        });
+        observer.observe(modalRaca, { attributes: true });
+    }
+
+    // Também inicializa no resize
+    window.addEventListener('resize', () => {
+        setTimeout(() => {
+            moverPara(racaAtual, false);
+        }, 100);
+    });
+
+    // Torna as funções globais
+    window.moverPara = moverPara;
+    window.inicializarCarrossel = inicializarCarrossel;
+    
+    // Inicialização fallback
+    setTimeout(inicializarCarrossel, 500);
 });
 
 // Modal das classes
