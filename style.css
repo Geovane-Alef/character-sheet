@@ -431,10 +431,6 @@ h6 {
     width: 85%;
 }
 
-#classesMoveis {
-    width: 1300%;
-}
-
 #racasMoveis, #classesMoveis {
     display: flex;
     transition: transform 0.6s ease-in-out;
@@ -518,7 +514,7 @@ h6 {
     min-height: 0;
 }
 
-.racas-lista {
+.racas-lista, .classes-lista {
     flex: 0 0 150px;
     display: flex;
     flex-direction: column;
