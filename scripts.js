@@ -611,47 +611,118 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(inicializarCarrossel, 500);
 });
 
-// Modal das classes
-let classeAtual = 0;
+// Modal das raças
 let abrirClasse = document.getElementById("descricaoClasse");
 let modalClasse = document.getElementById("modalClasse");
 let fecharClasse = document.getElementById("fecharClasse");
 
 // Abrir o modal
 abrirClasse.addEventListener("click", () => {
-  modalClasse.style.display = "flex"; // aparece centralizado
+    modalClasse.style.display = "flex";
+    // Inicializa o carrossel quando o modal abre
+    setTimeout(() => {
+        if (window.inicializarCarrossel) {
+            window.inicializarCarrossel();
+        }
+    }, 50);
 });
 
-// Fechar ao clicar no "x"
+// Fechar o modal
 fecharClasse.addEventListener("click", () => {
-  modalClasse.style.display = "none";
-});
-
-// Fechar ao clicar fora do conteúdo
-window.addEventListener("click", (event) => {
-  if (event.target === modalClasse) {
     modalClasse.style.display = "none";
-  }
 });
 
-// Seletor das classes (carrossel)
-function descreveClasse(indice) {
-  let container = document.getElementById('classesMoveis');
-  let labels = document.querySelectorAll('#modalClasse h4');
-  let classes = document.querySelectorAll('#classesMoveis .classes');
-  let totalClasses = classes.length;
+window.addEventListener("click", (event) => {
+    if (event.target === modalClasse) {
+        modalClasse.style.display = "none";
+    }
+});
 
-  if (indice < 0 || indice >= totalClasses) return;
+// Carrossel - Versão Corrigida
+document.addEventListener('DOMContentLoaded', () => {
+    let container = document.getElementById('classesMoveis');
+    let wrap = document.getElementById('classeWrap');
+    let labels = Array.from(document.querySelectorAll('.classes-lista .classe'));
+    let slides = Array.from(document.querySelectorAll('#classesMoveis .classes'));
+    
+    let classeAtual = 0;
 
-  // Ajusta o width do container
-  container.style.width = `${totalClasses * 100}%`;
+    function inicializarCarrossel() {
+        if (!container || !wrap) return;
+        
+        // Configura largura do container para N slides
+        container.style.width = `${slides.length * 100}%`;
+        
+        // Configura cada slide para ocupar exatamente 1/N da largura total
+        slides.forEach(slide => {
+            slide.style.width = `${100 / slides.length}%`;
+        });
+        
+        // Move para a primeira classe
+        moverPara(0, false);
+        
+        console.log('Carrossel inicializado com', slides.length, 'slides');
+    }
 
-  classeAtual = indice;
-  // move o carrossel (cada item ocupa 100%)
-  container.style.transform = `translateX(-${classeAtual * 100}%)`;
+    function moverPara(indice, suave = true) {
+        if (indice < 0 || indice >= slides.length) return;
+        
+        // Calcula o deslocamento baseado na largura VISÍVEL do wrap
+        const larguraVisivel = wrap.clientWidth;
+        const deslocamento = indice * larguraVisivel;
+        
+        if (!suave) {
+            container.style.transition = 'none';
+            container.style.transform = `translateX(-${deslocamento}px)`;
+            void container.offsetWidth; // Força reflow
+            container.style.transition = 'transform 0.6s ease-in-out';
+        } else {
+            container.style.transform = `translateX(-${deslocamento}px)`;
+        }
+        
+        classeAtual = indice;
+        
+        // Atualiza seleção visual
+        labels.forEach(l => l.classList.remove('botaoSelecionado'));
+        if (labels[indice]) labels[indice].classList.add('botaoSelecionado');
+        
+        console.log(`Movido para classe ${indice}, deslocamento: ${deslocamento}px`);
+    }
 
-  // limpa seleção anterior e aplica na atual
-  labels.forEach(el => el.classList.remove('botaoSelecionado'));
-  labels[indice].classList.add('botaoSelecionado');
-  console.log(classeAtual);
-}
+    // Adiciona eventos aos botões
+    labels.forEach((el, i) => {
+        el.addEventListener('mouseenter', () => moverPara(i));
+        el.addEventListener('click', () => moverPara(i));
+    });
+
+    // Inicializa quando o modal abrir
+    if (modalClasse) {
+        const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                if (mutation.attributeName === 'style') {
+                    const displayStyle = getComputedStyle(modalClasse).display;
+                    if (displayStyle === 'flex') {
+                        setTimeout(() => {
+                            inicializarCarrossel();
+                        }, 100);
+                    }
+                }
+            });
+        });
+        observer.observe(modalClasse, { attributes: true });
+    }
+
+    // Também inicializa no resize
+    window.addEventListener('resize', () => {
+        setTimeout(() => {
+            moverPara(classeAtual, false);
+        }, 100);
+    });
+
+    // Torna as funções globais
+    window.moverPara = moverPara;
+    window.inicializarCarrossel = inicializarCarrossel;
+    
+    // Inicialização fallback
+    setTimeout(inicializarCarrossel, 500);
+});
